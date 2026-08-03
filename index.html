@@ -106,9 +106,6 @@
             <a href="#about" class="block text-stone-700 font-semibold hover:text-aliOrange py-1">আমার সম্পর্কে</a>
             <a href="#help" class="block text-stone-700 font-semibold hover:text-aliOrange py-1">গাইডলাইন</a>
             <a href="#books" class="block text-stone-700 font-semibold hover:text-aliOrange py-1">বইয়ের তালিকা</a>
-            <a href="#ai-assistant" class="block text-aliBlue font-semibold hover:text-aliOrange py-1 flex items-center gap-1.5">
-                <i class="fa-solid fa-wand-magic-sparkles text-aliOrange"></i> AI অ্যাসিস্ট্যান্ট
-            </a>
             <a href="#articles" class="block text-stone-700 font-semibold hover:text-aliOrange py-1">আর্টিকেল</a>
             <a href="#newsletter" class="block text-center bg-aliOrange text-white px-4 py-2.5 rounded-full font-bold shadow-sm">
                 সাবস্ক্রাইব করুন
@@ -487,9 +484,6 @@
 
             <div class="flex justify-between items-center mb-6 pr-8">
                 <h3 class="text-2xl font-serif font-bold text-aliDark">নতুন বই যোগ করুন</h3>
-                <button type="button" onclick="autoFillWithAI()" id="aiAutofillBtn" class="bg-amber-100 hover:bg-amber-200 text-amber-900 text-xs font-bold px-3 py-1.5 rounded-xl transition-all border border-amber-300 flex items-center gap-1.5">
-                    <i class="fa-solid fa-wand-magic-sparkles text-aliOrange"></i> ✨ AI Auto-Fill
-                </button>
             </div>
 
             <form onsubmit="handleAddNewBook(event)" class="space-y-4">
@@ -521,16 +515,30 @@
                         </select>
                     </div>
                 </div>
+                
+                <!-- Photo File Upload Field -->
                 <div>
-                    <label for="newCover" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1">কভার ইমেজ লিংক (URL)</label>
+                    <label class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1">কভার ফটো আপলোড (Add Photo)</label>
+                    <div class="flex items-center gap-2">
+                        <label for="newCoverFile" class="cursor-pointer bg-stone-100 hover:bg-stone-200 text-stone-700 px-4 py-2 rounded-xl text-xs font-bold border border-stone-300 transition-colors flex items-center gap-2">
+                            <i class="fa-solid fa-image text-aliOrange"></i> ছবি ফাইল সিলেক্ট করুন
+                        </label>
+                        <input type="file" id="newCoverFile" accept="image/*" class="hidden" onchange="handleFileSelect(event)">
+                        <span id="fileNameDisplay" class="text-xs text-stone-500 truncate max-w-[180px]">কোনো ফাইল বেছে নেওয়া হয়নি</span>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="newCover" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1">অথবা কভার ইমেজ লিংক (URL)</label>
                     <input type="url" id="newCover" placeholder="https://example.com/cover.jpg" class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-sm focus:ring-2 focus:ring-aliBlue focus:outline-none">
                 </div>
+                
                 <div>
                     <label for="newTags" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1">ট্যাগ (কমা দিয়ে আলাদা করুন)</label>
                     <input type="text" id="newTags" placeholder="Productivity, Mindset" class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-sm focus:ring-2 focus:ring-aliBlue focus:outline-none">
                 </div>
                 <div>
-                    <label for="newSummary" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1">সংক্ষিপ্ত সমsummary / নোট</label>
+                    <label for="newSummary" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1">সংক্ষিপ্ত নোট</label>
                     <textarea id="newSummary" rows="3" placeholder="বইটির সংক্ষেপ বা মূল শিক্ষা সংক্ষেপে লিখুন..." class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-sm focus:ring-2 focus:ring-aliBlue focus:outline-none"></textarea>
                 </div>
 
@@ -546,6 +554,7 @@
     <script>
         /* ---------- Utilities & Safety ---------- */
         const STORAGE_KEY = 'ariful_reading_tracker_books';
+        let uploadedImageBase64 = '';
 
         function safeText(v, fallback = '') {
             return (v ?? fallback).toString();
@@ -587,44 +596,6 @@
 
         function generateId() {
             return String(Date.now()) + '-' + Math.random().toString(36).slice(2, 8);
-        }
-
-        /* ---------- Gemini API Integration ---------- */
-        async function fetchGeminiAPI(payload) {
-            const apiKey = "";
-            if (!apiKey) {
-                throw new Error('AI API Key configured via standard environment variable.');
-            }
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
-            
-            let retries = 0;
-            const maxRetries = 3;
-            let delay = 1000;
-
-            while (retries < maxRetries) {
-                try {
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-
-                    if (!response.ok) {
-                        if (response.status === 429 || response.status >= 500) {
-                            throw new Error(`HTTP ${response.status}`);
-                        }
-                        const errData = await response.json().catch(() => ({}));
-                        throw new Error(errData?.error?.message || 'Gemini API Error');
-                    }
-
-                    return await response.json();
-                } catch (error) {
-                    retries++;
-                    if (retries >= maxRetries) throw error;
-                    await new Promise(res => setTimeout(res, delay));
-                    delay *= 2;
-                }
-            }
         }
 
         /* ---------- Default Books Data ---------- */
@@ -973,18 +944,6 @@
                             </blockquote>
                         </div>
                     ` : ''}
-
-                    <div class="bg-gradient-to-r from-amber-50 to-orange-50 p-5 rounded-2xl border border-amber-200/80">
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="text-xs font-bold text-amber-900 uppercase tracking-wider flex items-center gap-1.5">
-                                <i class="fa-solid fa-wand-magic-sparkles text-aliOrange"></i> ✨ AI Deep Dive Analysis
-                            </span>
-                            <button onclick="askAiAboutBook('${book.title.replace(/'/g, "\\'")}', '${book.author.replace(/'/g, "\\'")}')" id="aiDeepDiveBtn" class="bg-aliOrange hover:bg-aliOrangeHover text-white text-xs font-bold px-3 py-2 rounded-xl transition-all shadow-sm">
-                                জীবনধারায় প্রয়োগের উপায় জানতে ক্লিক করুন
-                            </button>
-                        </div>
-                        <div id="aiDeepDiveResult" class="text-xs text-stone-700 leading-relaxed space-y-2 hidden"></div>
-                    </div>
                 </div>
 
                 <div class="mt-8 pt-4 border-t border-stone-100 flex justify-between items-center">
@@ -1022,6 +981,26 @@
             modal.classList.add('hidden');
             modal.classList.remove('flex');
             document.body.style.overflow = 'auto';
+            uploadedImageBase64 = '';
+            const fileNameDisplay = document.getElementById('fileNameDisplay');
+            if(fileNameDisplay) fileNameDisplay.innerText = 'কোনো ফাইল বেছে নেওয়া হয়নি';
+        }
+
+        /* ---------- File Input Handler ---------- */
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            const fileNameDisplay = document.getElementById('fileNameDisplay');
+            if (file) {
+                fileNameDisplay.innerText = file.name;
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    uploadedImageBase64 = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                uploadedImageBase64 = '';
+                fileNameDisplay.innerText = 'কোনো ফাইল বেছে নেওয়া হয়নি';
+            }
         }
 
         function handleAddNewBook(event) {
@@ -1031,7 +1010,9 @@
             const author = document.getElementById('newAuthor')?.value?.trim() || '';
             const status = normalizeStatus(document.getElementById('newStatus')?.value || 'want');
             const rating = Number(document.getElementById('newRating')?.value || 0);
-            const cover = document.getElementById('newCover')?.value?.trim() || 'https://placehold.co/200x300/F5F0E8/1E1E1E?text=Book+Cover';
+            
+            let cover = uploadedImageBase64 || document.getElementById('newCover')?.value?.trim() || 'https://placehold.co/200x300/F5F0E8/1E1E1E?text=Book+Cover';
+            
             const tagsRaw = document.getElementById('newTags')?.value || '';
             const summary = document.getElementById('newSummary')?.value?.trim() || '';
 
@@ -1076,175 +1057,6 @@
             renderBooks(document.getElementById('searchInput')?.value || '');
             updateStats();
             closeBookModal();
-        }
-
-        /* ---------- AI Integration Handlers ---------- */
-        async function autoFillWithAI() {
-            const titleInput = document.getElementById('newTitle');
-            const authorInput = document.getElementById('newAuthor');
-            const summaryInput = document.getElementById('newSummary');
-            const tagsInput = document.getElementById('newTags');
-
-            const title = titleInput?.value?.trim() || '';
-            const author = authorInput?.value?.trim() || '';
-
-            if (!title) {
-                alert('প্রথমে বইয়ের নাম (Title) লিখুন, তারপর AI Auto-Fill ব্যবহার করুন।');
-                return;
-            }
-
-            const btn = document.getElementById('aiAutofillBtn');
-            const origHtml = btn.innerHTML;
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> জেনারেট হচ্ছে...`;
-            btn.disabled = true;
-
-            const userPrompt = `A book titled "${title}" ${author ? 'by ' + author : ''}. Provide JSON with Bengali summary and English tags string array. JSON schema format: {"summary": "...", "tags": ["tag1", "tag2"]}`;
-
-            const payload = {
-                contents: [{ parts: [{ text: userPrompt }] }],
-                systemInstruction: {
-                    parts: [{ text: "You are a helpful book assistant. Reply ONLY with valid JSON having key summary (Bengali text 2-3 sentences) and tags (array of English strings)." }]
-                }
-            };
-
-            try {
-                const result = await fetchGeminiAPI(payload);
-                const rawText = result?.candidates?.[0]?.content?.parts?.[0]?.text || '{}';
-                const jsonMatch = rawText.match(/\{[\s\S]*\}/)?.[0] || '{}';
-                const data = JSON.parse(jsonMatch);
-
-                if (data.summary && summaryInput) summaryInput.value = data.summary;
-                if (data.tags && Array.isArray(data.tags) && tagsInput) tagsInput.value = data.tags.join(', ');
-            } catch (err) {
-                console.error("AI Auto-Fill Error:", err);
-                alert("AI জেনারেশনে সমস্যা হয়েছে। অনুগ্রহ করে ম্যানুয়ালি তথ্যগুলো পূরণ করুন।");
-            } finally {
-                btn.innerHTML = origHtml;
-                btn.disabled = false;
-            }
-        }
-
-        async function askAiAboutBook(title, author) {
-            const btn = document.getElementById('aiDeepDiveBtn');
-            const result = document.getElementById('aiDeepDiveResult');
-            if (!btn || !result) return;
-
-            btn.disabled = true;
-            result.classList.remove('hidden');
-            result.innerHTML = `<div class="text-amber-800 font-medium animate-pulse"><i class="fa-solid fa-wand-magic-sparkles"></i> Gemini AI থেকে বইটির প্রয়োগমূলক বিশ্লেষণ আসছে...</div>`;
-
-            const prompt = `Explain how a reader can apply the top principles from the book "${title}" by ${author} in their daily personal & work life. Write concise, actionable bullet points in warm Bengali.`;
-
-            const payload = {
-                contents: [{ parts: [{ text: prompt }] }],
-                systemInstruction: {
-                    parts: [{ text: "You are Ali Abdaal's AI assistant. Give practical, actionable productivity advice in Bengali." }]
-                }
-            };
-
-            try {
-                const data = await fetchGeminiAPI(payload);
-                const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || 'কোনো বিশ্লেষণ পাওয়া যায়নি।';
-                result.innerHTML = `<div class="bg-white/90 p-3 rounded-xl text-stone-800 border border-amber-200/60 leading-relaxed whitespace-pre-line">${escapeHtml(reply)}</div>`;
-            } catch (err) {
-                result.innerHTML = `<div class="text-red-600 font-semibold">এআই সার্ভিস এখন অনুপলব্ধ। কিছুক্ষণ পর চেষ্টা করুন।</div>`;
-                console.error(err);
-            } finally {
-                btn.disabled = false;
-            }
-        }
-
-        function setAiPrompt(text) {
-            const input = document.getElementById('aiChatInput');
-            if (!input) return;
-            input.value = text;
-            input.focus();
-        }
-
-        async function handleAiChatSubmit(e) {
-            e.preventDefault();
-            const input = document.getElementById('aiChatInput');
-            const submitBtn = document.getElementById('aiChatSubmitBtn');
-            const chatBox = document.getElementById('aiChatBox');
-            if (!input || !submitBtn || !chatBox) return;
-
-            const query = input.value.trim();
-            if (!query) return;
-
-            // Render User Message
-            const userMsgHtml = `
-                <div class="flex gap-3 justify-end">
-                    <div class="bg-aliDark text-white p-3 rounded-2xl rounded-tr-none text-stone-100 leading-relaxed max-w-[85%]">
-                        ${escapeHtml(query)}
-                    </div>
-                    <div class="w-8 h-8 rounded-full bg-aliOrange text-white flex items-center justify-center font-bold text-xs flex-shrink-0">
-                        ইউজার
-                    </div>
-                </div>
-            `;
-            chatBox.insertAdjacentHTML('beforeend', userMsgHtml);
-            input.value = '';
-            chatBox.scrollTop = chatBox.scrollHeight;
-
-            // Loading state
-            const loadingId = 'loading-' + Date.now();
-            const loadingHtml = `
-                <div id="${loadingId}" class="flex gap-3">
-                    <div class="w-8 h-8 rounded-full bg-aliBlue text-white flex items-center justify-center font-bold text-xs flex-shrink-0">
-                        AI
-                    </div>
-                    <div class="bg-white p-3 rounded-2xl rounded-tl-none border border-stone-200/60 shadow-sm text-stone-500 italic flex items-center gap-2">
-                        <i class="fa-solid fa-spinner fa-spin text-aliOrange"></i> আরিফুলের লাইব্রেরি থেকে তথ্য খুঁজছি...
-                    </div>
-                </div>
-            `;
-            chatBox.insertAdjacentHTML('beforeend', loadingHtml);
-            chatBox.scrollTop = chatBox.scrollHeight;
-            submitBtn.disabled = true;
-
-            const context = books.map(b => `Title: ${b.title}, Author: ${b.author}, Rating: ${b.rating}/5, Status: ${b.status}`).join('\n');
-            const systemPrompt = `You are Ariful's AI Reading Companion on his personal blog. Ariful follows Ali Abdaal's philosophy of productivity and active reading.
-Ariful's current library:\n${context}\n
-Answer user questions about books, productivity, and reading habits in friendly Bengali under 150 words.`;
-
-            const payload = {
-                contents: [{ parts: [{ text: query }] }],
-                systemInstruction: { parts: [{ text: systemPrompt }] }
-            };
-
-            try {
-                const responseData = await fetchGeminiAPI(payload);
-                const aiText = responseData?.candidates?.[0]?.content?.parts?.[0]?.text || 'দুঃখিত, কোনো উত্তর দেওয়া সম্ভব হয়নি।';
-
-                document.getElementById(loadingId)?.remove();
-
-                const aiMsgHtml = `
-                    <div class="flex gap-3">
-                        <div class="w-8 h-8 rounded-full bg-aliBlue text-white flex items-center justify-center font-bold text-xs flex-shrink-0">
-                            AI
-                        </div>
-                        <div class="bg-white p-3 rounded-2xl rounded-tl-none border border-stone-200/60 shadow-sm text-stone-700 leading-relaxed max-w-[85%] whitespace-pre-line">
-                            ${escapeHtml(aiText)}
-                        </div>
-                    </div>
-                `;
-                chatBox.insertAdjacentHTML('beforeend', aiMsgHtml);
-            } catch (err) {
-                console.error("AI Chat Error:", err);
-                document.getElementById(loadingId)?.remove();
-                const errorHtml = `
-                    <div class="flex gap-3">
-                        <div class="w-8 h-8 rounded-full bg-red-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">!</div>
-                        <div class="bg-red-50 text-red-700 p-3 rounded-2xl rounded-tl-none border border-red-200 text-xs">
-                            এআই সার্ভারের সাথে সংযোগ বিচ্ছিন্ন। পরে চেষ্টা করুন।
-                        </div>
-                    </div>
-                `;
-                chatBox.insertAdjacentHTML('beforeend', errorHtml);
-            } finally {
-                submitBtn.disabled = false;
-                chatBox.scrollTop = chatBox.scrollHeight;
-            }
         }
 
         /* ---------- Helper Listeners ---------- */
