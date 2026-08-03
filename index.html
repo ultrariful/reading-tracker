@@ -366,61 +366,6 @@
             </div>
         </section>
 
-        <!-- AI Reading Assistant Section -->
-        <section id="ai-assistant" class="py-16 bg-gradient-to-b from-white to-aliBg border-y border-stone-200/80">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="bg-white rounded-3xl p-6 sm:p-10 border border-stone-200 shadow-xl relative overflow-hidden">
-                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-aliYellow/30 rounded-full blur-2xl"></div>
-                    <div class="relative z-10">
-                        <div class="flex items-center gap-3 mb-3">
-                            <span class="bg-aliBlue/10 text-aliBlue p-2.5 rounded-2xl text-xl"><i class="fa-solid fa-robot"></i></span>
-                            <div>
-                                <span class="text-xs font-bold uppercase tracking-wider text-aliOrange">Gemini AI Powered</span>
-                                <h2 class="text-2xl sm:text-3xl font-serif font-bold text-aliDark">Ariful's AI Reading Companion</h2>
-                            </div>
-                        </div>
-                        <p class="text-sm text-stone-600 mb-6">
-                            আমার পঠিত বইয়ের কালেকশন এবং প্রোডাক্টিভিটি জ্ঞান নিয়ে যেকোনো প্রশ্ন করুন, কিংবা আপনার পড়ার পছন্দ অনুযায়ী নতুন বইয়ের সাজেশন নিন!
-                        </p>
-
-                        <!-- Quick Action Prompts -->
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <button onclick="setAiPrompt('আমার জন্য পরবর্তী বই পড়ার ৩টি বেস্ট সাজেশন দাও')" class="text-xs bg-aliBg hover:bg-stone-200/70 text-stone-700 px-3 py-1.5 rounded-full border border-stone-200 transition-colors">
-                                💡 পরবর্তী বইয়ের সাজেশন
-                            </button>
-                            <button onclick="setAiPrompt('Atomic Habits এবং Feel-Good Productivity এর মধ্যে প্রধান মিল ও পার্থক্য কী?')" class="text-xs bg-aliBg hover:bg-stone-200/70 text-stone-700 px-3 py-1.5 rounded-full border border-stone-200 transition-colors">
-                                ⚖️ বইয়ের তুলনা
-                            </button>
-                            <button onclick="setAiPrompt('কীভাবে বই পড়ে মনে রাখার অভ্যাস তৈরি করা যায়?')" class="text-xs bg-aliBg hover:bg-stone-200/70 text-stone-700 px-3 py-1.5 rounded-full border border-stone-200 transition-colors">
-                                🧠 মেমোরি টিপস
-                            </button>
-                        </div>
-
-                        <!-- Chat Output Area -->
-                        <div id="aiChatBox" class="bg-aliBg/70 rounded-2xl p-4 sm:p-5 border border-stone-200/80 mb-4 max-h-72 overflow-y-auto space-y-3 text-sm">
-                            <div class="flex gap-3">
-                                <div class="w-8 h-8 rounded-full bg-aliBlue text-white flex items-center justify-center font-bold text-xs flex-shrink-0">
-                                    AI
-                                </div>
-                                <div class="bg-white p-3 rounded-2xl rounded-tl-none border border-stone-200/60 shadow-sm text-stone-700 leading-relaxed">
-                                    হ্যালো! 👋 আমি আরিফুলের AI বুক অ্যাসিস্ট্যান্ট। আরিফুলের পঠিত বইগুলো থেকে জ্ঞান শেয়ার করতে বা নতুন বই রিকমেন্ড করতে প্রস্তুত। আপনাকে কীভাবে সাহায্য করতে পারি?
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Chat Input Form -->
-                        <form onsubmit="handleAiChatSubmit(event)" class="flex gap-2">
-                            <input type="text" id="aiChatInput" placeholder="যেমন: প্রোডাক্টিভিটি বাড়াতে ৩টি বইয়ের নাম বলুন..." required
-                                   class="flex-grow px-4 py-3 rounded-2xl border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-aliBlue bg-stone-50/50">
-                            <button type="submit" id="aiChatSubmitBtn" class="bg-aliDark hover:bg-black text-white px-6 py-3 rounded-2xl text-sm font-bold transition-all shadow-sm flex items-center gap-2">
-                                <span>পাঠান</span> <i class="fa-solid fa-paper-plane text-xs text-aliYellow"></i>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Featured Articles Section -->
         <section id="articles" class="py-16 bg-aliDark text-white">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
