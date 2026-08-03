@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="bn" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ariful | Personal Website & Book Tracker</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Lora for Serif Headings, Inter for Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,500;0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Lora', 'serif'],
+                    },
+                    colors: {
+                        aliBg: '#FAF7F2',
+                        aliCard: '#F5F0E8',
+                        aliOrange: '#FF6B35',
+                        aliOrangeHover: '#E85A24',
+                        aliYellow: '#FED156',
+                        aliBlue: '#2B82C5',
+                        aliDark: '#1E1E1E',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Levitating Animation for Hero Avatar */
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-14px) rotate(1deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        .animate-levitate {
+            animation: float 4.5s ease-in-out infinite;
+        }
+
+        /* Handwritten underline effect */
+        .wavy-underline {
+            text-decoration: underline;
+            text-decoration-color: #2B82C5;
+            text-decoration-thickness: 3px;
+            text-underline-offset: 6px;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAF7F2;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D1C7B7;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #B0A28F;
+        }
+    </style>
+</head>
+<body class="bg-aliBg text-aliDark font-sans antialiased selection:bg-aliYellow selection:text-aliDark min-h-screen flex flex-col justify-between">
+
+    <!-- Navigation Bar (Ali Abdaal Style) -->
+    <header class="sticky top-0 z-40 bg-aliBg/90 backdrop-blur-md border-b border-stone-200/60">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Brand Logo / Name -->
+                <a href="#" class="flex items-center gap-2 group">
+                    <span class="font-serif font-bold text-2xl tracking-tight text-aliDark group-hover:text-aliOrange transition-colors">
+                        Ariful<span class="text-aliOrange">.</span>
+                    </span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-stone-700">
+                    <a href="#about" class="hover:text-aliOrange transition-colors">আমার সম্পর্কে</a>
+                    <a href="#help" class="hover:text-aliOrange transition-colors">গাইডলাইন</a>
+                    <a href="#books" class="hover:text-aliOrange transition-colors">বইয়ের তালিকা</a>
+                    <a href="#ai-assistant" class="hover:text-aliOrange transition-colors flex items-center gap-1.5 text-aliBlue">
+                        <i class="fa-solid fa-wand-magic-sparkles text-aliOrange"></i> AI অ্যাসিস্ট্যান্ট
+                    </a>
+                    <a href="#articles" class="hover:text-aliOrange transition-colors">আর্টিকেল</a>
+                    <a href="#newsletter" class="bg-aliOrange hover:bg-aliOrangeHover text-white px-5 py-2.5 rounded-full text-sm font-bold shadow-sm hover:shadow transition-all flex items-center gap-2">
+                        সাবস্ক্রাইব করুন <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" aria-label="Toggle Menu" class="md:hidden text-stone-700 hover:text-aliDark focus:outline-none p-2">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobileMenu" class="hidden md:hidden bg-aliBg border-b border-stone-200 px-6 pt-3 pb-6 space-y-4">
+            <a href="#about" class="block text-stone-700 font-semibold hover:text-aliOrange py-1">আমার সম্পর্কে</a>
+            <a href="#help" class="block text-stone-700 font-semibold hover:text-aliOrange py-1">গাইডলাইন</a>
+            <a href="#books" class="block text-stone-700 font-semibold hover:text-aliOrange py-1">বইয়ের তালিকা</a>
+            <a href="#ai-assistant" class="block text-aliBlue font-semibold hover:text-aliOrange py-1 flex items-center gap-1.5">
+                <i class="fa-solid fa-wand-magic-sparkles text-aliOrange"></i> AI অ্যাসিস্ট্যান্ট
+            </a>
+            <a href="#articles" class="block text-stone-700 font-semibold hover:text-aliOrange py-1">আর্টিকেল</a>
+            <a href="#newsletter" class="block text-center bg-aliOrange text-white px-4 py-2.5 rounded-full font-bold shadow-sm">
+                সাবস্ক্রাইব করুন
+            </a>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- Hero Section -->
+        <section id="about" class="py-12 md:py-20">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-12 gap-10 lg:gap-12 items-center">
+                    
+                    <!-- Left Column: Profile Avatar with Levitating Animation -->
+                    <div class="md:col-span-5 flex justify-center order-1 md:order-1">
+                        <div class="relative w-72 h-72 sm:w-80 sm:h-80 flex items-center justify-center">
+                            <!-- Background Yellow Blob / Circle -->
+                            <div class="absolute inset-2 bg-aliYellow rounded-full -rotate-6 transform scale-105 shadow-inner"></div>
+                            <div class="absolute -right-2 bottom-12 w-12 h-12 bg-aliYellow rounded-tr-3xl rotate-45 hidden sm:block"></div>
+
+                            <!-- Levitating Image Container -->
+                            <div class="relative w-64 h-64 sm:w-72 sm:h-72 rounded-full overflow-hidden border-4 border-white shadow-2xl animate-levitate z-10 bg-stone-100">
+                                <img id="profileImage" src="https://i.ibb.co/vz448sS/profile.jpg" 
+                                     alt="Ariful Photo" 
+                                     class="w-full h-full object-cover object-top"
+                                     onerror="this.src='https://placehold.co/400x400/FED156/1E1E1E?text=Ariful'">
+                            </div>
+
+                            <!-- Decorative Floating Reading Goal Badge -->
+                            <div class="absolute -bottom-2 -right-2 sm:bottom-2 sm:right-0 bg-white px-4 py-2.5 rounded-2xl shadow-xl border border-stone-100 flex items-center gap-2.5 z-20">
+                                <span class="text-xl">📚</span>
+                                <div>
+                                    <div class="text-[10px] font-bold uppercase tracking-wider text-stone-400">রিডিং গোল</div>
+                                    <div class="text-xs font-bold text-stone-800"><span id="yearlyCount">0</span>/24 টি সম্পূর্ণ</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Bio Text & Social Links -->
+                    <div class="md:col-span-7 space-y-6 order-2 md:order-2">
+                        <div class="space-y-3">
+                            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-aliDark tracking-tight leading-tight">
+                                Hey Friends <span class="inline-block animate-bounce">👋</span>
+                            </h1>
+                            <p class="text-xl sm:text-2xl font-serif text-stone-700 leading-relaxed">
+                                আমি <span class="font-bold text-aliDark wavy-underline">আরিফুল</span>। আমি মূলত বই পড়ার অভ্যাস, প্রোডাক্টিভিটি এবং পার্সোনাল ব্র্যান্ডিং নিয়ে কাজ করি।
+                            </p>
+                        </div>
+
+                        <p class="text-base sm:text-lg text-stone-600 leading-relaxed">
+                            আলী আবদালের দর্শন অনুসরণ করে আমি বিশ্বাস করি, যা কিছু আমরা পড়ি ও শিখি—তা অপরের সাথে শেয়ার করার মাধ্যমেই জ্ঞানের আসল প্রকাশ ঘটে। এখানে আমার পড়া সব বইয়ের রিভিউ, পার্সোনাল নোটস এবং চিন্তাভাবনা শেয়ার করি।
+                        </p>
+
+                        <!-- CTA & Social Buttons Row -->
+                        <div class="pt-2 flex flex-wrap items-center gap-4">
+                            <a href="#books" class="bg-aliDark hover:bg-black text-white px-6 py-3.5 rounded-2xl font-semibold text-sm transition-all shadow-md hover:shadow-lg flex items-center gap-2.5">
+                                <i class="fa-solid fa-book-bookmark text-aliYellow"></i> বইগুলো দেখুন
+                            </a>
+
+                            <div class="flex items-center gap-2">
+                                <a href="https://www.linkedin.com/in/ultrariful/" target="_blank" rel="noopener noreferrer" 
+                                   title="LinkedIn" 
+                                   class="w-11 h-11 rounded-2xl bg-white border border-stone-200 text-[#0A66C2] flex items-center justify-center hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2] transition-all shadow-sm hover:scale-105">
+                                    <i class="fa-brands fa-linkedin-in text-lg"></i>
+                                </a>
+
+                                <a href="https://github.com/ultrariful" target="_blank" rel="noopener noreferrer" 
+                                   title="GitHub" 
+                                   class="w-11 h-11 rounded-2xl bg-white border border-stone-200 text-aliDark flex items-center justify-center hover:bg-aliDark hover:text-white hover:border-aliDark transition-all shadow-sm hover:scale-105">
+                                    <i class="fa-brands fa-github text-lg"></i>
+                                </a>
+
+                                <a href="https://substack.com/@ultrariful" target="_blank" rel="noopener noreferrer" 
+                                   title="Substack" 
+                                   class="w-11 h-11 rounded-2xl bg-white border border-stone-200 text-[#FF6719] flex items-center justify-center hover:bg-[#FF6719] hover:text-white hover:border-[#FF6719] transition-all shadow-sm hover:scale-105">
+                                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                                        <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/>
+                                    </svg>
+                                </a>
+
+                                <a href="https://www.reddit.com/user/ultrariful/" target="_blank" rel="noopener noreferrer" 
+                                   title="Reddit" 
+                                   class="w-11 h-11 rounded-2xl bg-white border border-stone-200 text-[#FF4500] flex items-center justify-center hover:bg-[#FF4500] hover:text-white hover:border-[#FF4500] transition-all shadow-sm hover:scale-105">
+                                    <i class="fa-brands fa-reddit-alien text-lg"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Featured Sub-Card -->
+                        <div class="mt-8 bg-white p-6 rounded-3xl border border-stone-200/80 shadow-sm relative overflow-hidden">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-2xl bg-sky-100 text-aliBlue flex items-center justify-center text-xl font-bold flex-shrink-0">
+                                    <i class="fa-solid fa-bullseye"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-aliDark text-lg">সাপ্তাহিক বুক সামারি ও লার্নিং</h3>
+                                    <p class="text-sm text-stone-600 mt-1 leading-relaxed">
+                                        প্রতি সপ্তাহে আমার পঠিত বইগুলোর মূল শিক্ষা, জীবনযাত্রার উন্নতি ও প্রোডাক্টিভিটি টিপস সরাসরি ইমেইলে পড়তে সাবস্ক্রাইব করুন।
+                                    </p>
+                                    <a href="#newsletter" class="inline-flex items-center text-xs font-bold text-aliBlue hover:text-aliOrange mt-3 gap-1 transition-colors">
+                                        নিউজলেটারে যোগ দিন <i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- How Can I Help You Section -->
+        <section id="help" class="py-16 bg-white border-y border-stone-200/60">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <h2 class="text-3xl sm:text-4xl font-serif font-bold text-aliDark">
+                        How Can I <span class="wavy-underline text-aliBlue">Help You?</span>
+                    </h2>
+                    <p class="text-stone-600 mt-3 text-base">
+                        পড়া, শেখা এবং ব্যক্তিগত দক্ষতার বিকাশে কীভাবে এই প্ল্যাটফর্মটি আপনাকে সহায়তা করতে পারে
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-aliBg p-8 rounded-3xl border border-stone-200/70 hover:shadow-lg transition-all flex flex-col justify-between group">
+                        <div>
+                            <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                                💡
+                            </div>
+                            <h3 class="text-xl font-serif font-bold text-aliDark mb-2">Be More Productive</h3>
+                            <p class="text-sm text-stone-600 leading-relaxed">
+                                কীভাবে সময় ঠিক রেখে প্রতিদিনের গুরুত্বপূর্ণ কাজগুলো আনন্দের সাথে সম্পন্ন করবেন তার কার্যকর কৌশল।
+                            </p>
+                        </div>
+                        <a href="#books" class="mt-6 inline-flex items-center text-xs font-bold text-aliDark group-hover:text-aliOrange gap-1">
+                            বইয়ের নোট দেখুন <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <div class="bg-aliBg p-8 rounded-3xl border border-stone-200/70 hover:shadow-lg transition-all flex flex-col justify-between group">
+                        <div>
+                            <div class="w-14 h-14 rounded-2xl bg-sky-100 text-aliBlue flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                                📖
+                            </div>
+                            <h3 class="text-xl font-serif font-bold text-aliDark mb-2">Read Smartly</h3>
+                            <p class="text-sm text-stone-600 leading-relaxed">
+                                দ্রুত নয়, বরং গভীরভাবে পড়ে কীভাবে বইয়ের জ্ঞান আজীবন মনে রাখা যায় ও বাস্তবে প্রয়োগ করা যায়।
+                            </p>
+                        </div>
+                        <a href="#books" class="mt-6 inline-flex items-center text-xs font-bold text-aliDark group-hover:text-aliOrange gap-1">
+                            পড়ার পদ্ধতি জানুন <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <div class="bg-aliBg p-8 rounded-3xl border border-stone-200/70 hover:shadow-lg transition-all flex flex-col justify-between group">
+                        <div>
+                            <div class="w-14 h-14 rounded-2xl bg-orange-100 text-aliOrange flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                                🚀
+                            </div>
+                            <h3 class="text-xl font-serif font-bold text-aliDark mb-2">Personal Branding</h3>
+                            <p class="text-sm text-stone-600 leading-relaxed">
+                                "Show Your Work" নীতি মেনে কীভাবে নিজের কাজ ও শেখন অভিজ্ঞতা সবার সামনে শেয়ার করে রিচ তৈরি করবেন।
+                            </p>
+                        </div>
+                        <a href="#articles" class="mt-6 inline-flex items-center text-xs font-bold text-aliDark group-hover:text-aliOrange gap-1">
+                            আর্টিকেলগুলো দেখুন <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section id="stats" class="py-10 bg-aliBg">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200/80 text-center">
+                        <div class="text-3xl font-serif font-bold text-aliDark mb-1" id="statTotalBooks">0</div>
+                        <div class="text-[11px] font-bold text-stone-500 uppercase tracking-wider">মোট পঠিত বই</div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200/80 text-center">
+                        <div class="text-3xl font-serif font-bold text-aliBlue mb-1" id="statReadingNow">0</div>
+                        <div class="text-[11px] font-bold text-stone-500 uppercase tracking-wider">এখন পড়ছি</div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200/80 text-center">
+                        <div class="text-3xl font-serif font-bold text-aliOrange mb-1" id="statTopRated">0</div>
+                        <div class="text-[11px] font-bold text-stone-500 uppercase tracking-wider">৫-স্টার রেটেড</div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200/80 text-center">
+                        <div class="text-3xl font-serif font-bold text-emerald-600 mb-1" id="statWantToRead">0</div>
+                        <div class="text-[11px] font-bold text-stone-500 uppercase tracking-wider">পড়ার অপেক্ষায়</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Books Tracker Section -->
+        <section id="books" class="py-16">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-widest text-aliBlue">মাই বুক শেলফ</span>
+                        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-aliDark tracking-tight mt-1">আমার পঠিত বইয়ের সংগ্রহ</h2>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <!-- Search Input -->
+                        <div class="relative w-full md:w-72">
+                            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400 text-sm"></i>
+                            <input type="text" id="searchInput" placeholder="বই বা লেখকের নাম খুঁজুন..." 
+                                   class="w-full pl-10 pr-4 py-2.5 bg-white border border-stone-200 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-aliBlue transition-all shadow-sm">
+                        </div>
+
+                        <button onclick="openAddBookModal()" class="bg-aliOrange hover:bg-aliOrangeHover text-white px-4 py-2.5 rounded-2xl text-sm font-bold shadow-sm transition-all whitespace-nowrap flex items-center gap-2">
+                            <i class="fa-solid fa-plus text-xs"></i> যোগ করুন
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Category Filters -->
+                <div class="flex flex-wrap gap-2 mb-10 border-b border-stone-200/80 pb-4">
+                    <button class="filter-btn active bg-aliDark text-white px-4 py-2 rounded-xl text-xs font-bold transition-all">
+                        সবগুলো (<span id="count-all">0</span>)
+                    </button>
+                    <button class="filter-btn bg-white text-stone-600 hover:bg-stone-100 px-4 py-2 rounded-xl text-xs font-bold transition-all border border-stone-200">
+                        পড়া শেষ (<span id="count-finished">0</span>)
+                    </button>
+                    <button class="filter-btn bg-white text-stone-600 hover:bg-stone-100 px-4 py-2 rounded-xl text-xs font-bold transition-all border border-stone-200">
+                        এখন পড়ছি (<span id="count-reading">0</span>)
+                    </button>
+                    <button class="filter-btn bg-white text-stone-600 hover:bg-stone-100 px-4 py-2 rounded-xl text-xs font-bold transition-all border border-stone-200">
+                        পড়তে চাই (<span id="count-want">0</span>)
+                    </button>
+                    <button class="filter-btn bg-white text-stone-600 hover:bg-stone-100 px-4 py-2 rounded-xl text-xs font-bold transition-all border border-stone-200">
+                        <i class="fa-solid fa-star text-aliYellow mr-1"></i> প্রিয় ৫-স্টার
+                    </button>
+                </div>
+
+                <!-- Books Grid Container -->
+                <div id="booksGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Dynamic rendering -->
+                </div>
+
+                <!-- Empty State -->
+                <div id="emptyState" class="hidden text-center py-16 bg-white rounded-3xl border border-dashed border-stone-300">
+                    <i class="fa-solid fa-book-open text-4xl text-stone-300 mb-3"></i>
+                    <h3 class="text-lg font-bold text-stone-700">কোনো বই পাওয়া যায়নি!</h3>
+                    <p class="text-sm text-stone-500 mt-1">অনুগ্রহ করে অন্য শব্দ দিয়ে সার্চ করুন অথবা ফিল্টার পরিবর্তন করুন।</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- AI Reading Assistant Section -->
+        <section id="ai-assistant" class="py-16 bg-gradient-to-b from-white to-aliBg border-y border-stone-200/80">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-white rounded-3xl p-6 sm:p-10 border border-stone-200 shadow-xl relative overflow-hidden">
+                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-aliYellow/30 rounded-full blur-2xl"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="bg-aliBlue/10 text-aliBlue p-2.5 rounded-2xl text-xl"><i class="fa-solid fa-robot"></i></span>
+                            <div>
+                                <span class="text-xs font-bold uppercase tracking-wider text-aliOrange">Gemini AI Powered</span>
+                                <h2 class="text-2xl sm:text-3xl font-serif font-bold text-aliDark">Ariful's AI Reading Companion</h2>
+                            </div>
+                        </div>
+                        <p class="text-sm text-stone-600 mb-6">
+                            আমার পঠিত বইয়ের কালেকশন এবং প্রোডাক্টিভিটি জ্ঞান নিয়ে যেকোনো প্রশ্ন করুন, কিংবা আপনার পড়ার পছন্দ অনুযায়ী নতুন বইয়ের সাজেশন নিন!
+                        </p>
+
+                        <!-- Quick Action Prompts -->
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <button onclick="setAiPrompt('আমার জন্য পরবর্তী বই পড়ার ৩টি বেস্ট সাজেশন দাও')" class="text-xs bg-aliBg hover:bg-stone-200/70 text-stone-700 px-3 py-1.5 rounded-full border border-stone-200 transition-colors">
+                                💡 পরবর্তী বইয়ের সাজেশন
+                            </button>
+                            <button onclick="setAiPrompt('Atomic Habits এবং Feel-Good Productivity এর মধ্যে প্রধান মিল ও পার্থক্য কী?')" class="text-xs bg-aliBg hover:bg-stone-200/70 text-stone-700 px-3 py-1.5 rounded-full border border-stone-200 transition-colors">
+                                ⚖️ বইয়ের তুলনা
+                            </button>
+                            <button onclick="setAiPrompt('কীভাবে বই পড়ে মনে রাখার অভ্যাস তৈরি করা যায়?')" class="text-xs bg-aliBg hover:bg-stone-200/70 text-stone-700 px-3 py-1.5 rounded-full border border-stone-200 transition-colors">
+                                🧠 মেমোরি টিপস
+                            </button>
+                        </div>
+
+                        <!-- Chat Output Area -->
+                        <div id="aiChatBox" class="bg-aliBg/70 rounded-2xl p-4 sm:p-5 border border-stone-200/80 mb-4 max-h-72 overflow-y-auto space-y-3 text-sm">
+                            <div class="flex gap-3">
+                                <div class="w-8 h-8 rounded-full bg-aliBlue text-white flex items-center justify-center font-bold text-xs flex-shrink-0">
+                                    AI
+                                </div>
+                                <div class="bg-white p-3 rounded-2xl rounded-tl-none border border-stone-200/60 shadow-sm text-stone-700 leading-relaxed">
+                                    হ্যালো! 👋 আমি আরিফুলের AI বুক অ্যাসিস্ট্যান্ট। আরিফুলের পঠিত বইগুলো থেকে জ্ঞান শেয়ার করতে বা নতুন বই রিকমেন্ড করতে প্রস্তুত। আপনাকে কীভাবে সাহায্য করতে পারি?
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chat Input Form -->
+                        <form onsubmit="handleAiChatSubmit(event)" class="flex gap-2">
+                            <input type="text" id="aiChatInput" placeholder="যেমন: প্রোডাক্টিভিটি বাড়াতে ৩টি বইয়ের নাম বলুন..." required
+                                   class="flex-grow px-4 py-3 rounded-2xl border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-aliBlue bg-stone-50/50">
+                            <button type="submit" id="aiChatSubmitBtn" class="bg-aliDark hover:bg-black text-white px-6 py-3 rounded-2xl text-sm font-bold transition-all shadow-sm flex items-center gap-2">
+                                <span>পাঠান</span> <i class="fa-solid fa-paper-plane text-xs text-aliYellow"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Articles Section -->
+        <section id="articles" class="py-16 bg-aliDark text-white">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-end mb-10">
+                    <div>
+                        <span class="text-aliYellow text-xs font-bold uppercase tracking-widest">জ্ঞান চর্চা</span>
+                        <h2 class="text-3xl font-serif font-bold tracking-tight mt-1">সাম্প্রতিক আর্টিকেল ও ব্লগ</h2>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <article class="bg-[#2A2A2A] rounded-3xl p-6 border border-stone-800 hover:border-stone-700 transition-all flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs text-stone-400">মে ২০২৬ • ৫ মিনিট পড়ার সময়</span>
+                            <h3 class="text-lg font-serif font-bold mt-2 mb-3 text-stone-100 hover:text-aliYellow transition-colors cursor-pointer">
+                                প্রতি সপ্তাহে একটি বই পড়ার সহজ ও কার্যকর পদ্ধতি
+                            </h3>
+                            <p class="text-sm text-stone-400 line-clamp-3">
+                                কীভাবে সময় বের করবেন এবং পড়ার গতি না বাড়িয়েও কীভাবে গভীরভাবে উপলব্ধি করে পড়ার অভ্যাস গড়ে তোলা যায়...
+                            </p>
+                        </div>
+                        <a href="#" class="mt-6 inline-flex items-center text-xs font-bold text-aliYellow hover:underline gap-1.5">
+                            পড়ুন <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </article>
+
+                    <article class="bg-[#2A2A2A] rounded-3xl p-6 border border-stone-800 hover:border-stone-700 transition-all flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs text-stone-400">এপ্রিল ২০২৬ • ৪ মিনিট পড়ার সময়</span>
+                            <h3 class="text-lg font-serif font-bold mt-2 mb-3 text-stone-100 hover:text-aliYellow transition-colors cursor-pointer">
+                                কেন অ্যাক্টিভ নোট টেকিং দিয়ে বই পড়া প্রয়োজন?
+                            </h3>
+                            <p class="text-sm text-stone-400 line-clamp-3">
+                                সাধারণ আন্ডারলাইন করার চেয়ে নোট টেকিং সিস্টেম ব্যবহার করে কীভাবে বইয়ের গুরুত্বপূর্ণ বিষয়সমূহ আজীবন মনে রাখা যায়...
+                            </p>
+                        </div>
+                        <a href="#" class="mt-6 inline-flex items-center text-xs font-bold text-aliYellow hover:underline gap-1.5">
+                            পড়ুন <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </article>
+
+                    <article class="bg-[#2A2A2A] rounded-3xl p-6 border border-stone-800 hover:border-stone-700 transition-all flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs text-stone-400">মার্চ ২০২৬ • ৭ মিনিট পড়ার সময়</span>
+                            <h3 class="text-lg font-serif font-bold mt-2 mb-3 text-stone-100 hover:text-aliYellow transition-colors cursor-pointer">
+                                ২০২৬ সালের আমার পড়া সেরা ৫টি প্রোডাক্টিভিটি বই
+                            </h3>
+                            <p class="text-sm text-stone-400 line-clamp-3">
+                                এই বছরের প্রথম কয়েক মাসে পড়া বইগুলোর মধ্যে যে ৫টি বই আমার প্রতিদিনের রুটিন ও চিন্তাভাবনা পুরোপুরি বদলে দিয়েছে...
+                            </p>
+                        </div>
+                        <a href="#" class="mt-6 inline-flex items-center text-xs font-bold text-aliYellow hover:underline gap-1.5">
+                            পড়ুন <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section id="newsletter" class="py-16 bg-aliYellow/20 border-y border-stone-200">
+            <div class="max-w-3xl mx-auto px-4 text-center">
+                <div class="w-14 h-14 bg-aliYellow text-aliDark rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl shadow-sm">
+                    ✉️
+                </div>
+                <h2 class="text-3xl font-serif font-bold text-aliDark tracking-tight">আমার সাপ্তাহিক নিউজলেটারে যুক্ত হোন</h2>
+                <p class="text-stone-600 mt-2 text-base">
+                    প্রতি রবিবারে আমার পড়া সেরা বইয়ের নির্যাস ও কার্যকর লার্নিং ইমেইলে পেয়ে যাবেন।
+                </p>
+
+                <form onsubmit="handleSubscribe(event)" class="mt-6 flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                    <input type="email" required placeholder="আপনার ইমেইল এড্রেস লিখুন..." 
+                           class="flex-grow px-5 py-3.5 rounded-2xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-aliBlue text-sm bg-white">
+                    <button type="submit" class="bg-aliOrange hover:bg-aliOrangeHover text-white font-bold px-7 py-3.5 rounded-2xl transition-all shadow-sm text-sm whitespace-nowrap">
+                        সাবস্ক্রাইব
+                    </button>
+                </form>
+                <div id="subMessage" class="hidden text-sm text-emerald-800 font-bold mt-3">
+                    <i class="fa-solid fa-circle-check"></i> ধন্যবাদ! সাবস্ক্রিপশন সফল হয়েছে।
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-stone-200 py-10">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p class="text-stone-500 text-xs sm:text-sm">
+                © ২০২৬ Ariful। সর্বস্বত্ব সংরক্ষিত। GitHub Pages-এ হোস্টকৃত।
+            </p>
+
+            <div class="flex items-center gap-4 text-stone-500">
+                <a href="https://www.linkedin.com/in/ultrariful/" target="_blank" rel="noopener" class="hover:text-aliOrange transition-colors"><i class="fa-brands fa-linkedin-in text-base"></i></a>
+                <a href="https://github.com/ultrariful" target="_blank" rel="noopener" class="hover:text-aliOrange transition-colors"><i class="fa-brands fa-github text-base"></i></a>
+                <a href="https://substack.com/@ultrariful" target="_blank" rel="noopener" class="hover:text-aliOrange transition-colors">
+                    <svg class="w-4 h-4 fill-current inline" viewBox="0 0 24 24"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+                </a>
+                <a href="https://www.reddit.com/user/ultrariful/" target="_blank" rel="noopener" class="hover:text-aliOrange transition-colors"><i class="fa-brands fa-reddit-alien text-base"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Book Details Modal -->
+    <div id="bookModal" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-stone-100 p-6 sm:p-8 relative my-8">
+            <button onclick="closeBookModal()" aria-label="Close" class="absolute top-6 right-6 text-stone-400 hover:text-stone-600 w-9 h-9 rounded-full bg-stone-100 flex items-center justify-center transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div id="modalContent">
+                <!-- Dynamic Content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Add New Book Modal -->
+    <div id="addBookModal" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-lg w-full shadow-2xl border border-stone-100 p-6 sm:p-8 relative my-8">
+            <button onclick="closeAddBookModal()" aria-label="Close" class="absolute top-6 right-6 text-stone-400 hover:text-stone-600 w-9 h-9 rounded-full bg-stone-100 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="flex justify-between items-center mb-6 pr-8">
+                <h3 class="text-2xl font-serif font-bold text-aliDark">নতুন বই যোগ করুন</h3>
+                <button type="button" onclick="autoFillWithAI()" id="aiAutofillBtn" class="bg-amber-100 hover:bg-amber-200 text-amber-900 text-xs font-bold px-3 py-1.5 rounded-xl transition-all border border-amber-300 flex items-center gap-1.5">
+                    <i class="fa-solid fa-wand-magic-sparkles text-aliOrange"></i> ✨ AI Auto-Fill
+                </button>
+            </div>
+
+            <form onsubmit="handleAddNewBook(event)" class="space-y-4">
+                <div>
+                    <label for="newTitle" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1">বইয়ের নাম *</label>
+                    <input type="text" id="newTitle" required placeholder="e.g. Deep Work" class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-sm focus:ring-2 focus:ring-aliBlue focus:outline-none">
+                </div>
+                <div>
+                    <label for="newAuthor" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1">লেখকের নাম *</label>
+                    <input type="text" id="newAuthor" required placeholder="e.g. Cal Newport" class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-sm focus:ring-2 focus:ring-aliBlue focus:outline-none">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="newStatus" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1">স্ট্যাটাস *</label>
+                        <select id="newStatus" class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-sm focus:ring-2 focus:ring-aliBlue focus:outline-none bg-white">
+                            <option value="finished">পড়া শেষ (Finished)</option>
+                            <option value="reading">এখন পড়ছি (Reading)</option>
+                            <option value="want">পড়তে চাই (Want to Read)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="newRating" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1">রেটিং (১-৫)</label>
+                        <select id="newRating" class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-sm focus:ring-2 focus:ring-aliBlue focus:outline-none bg-white">
+                            <option value="5">⭐⭐⭐⭐⭐ (5/5)</option>
+                            <option value="4">⭐⭐⭐⭐ (4/5)</option>
+                            <option value="3">⭐⭐⭐ (3/5)</option>
+                            <option value="2">⭐⭐ (2/5)</option>
+                            <option value="1">⭐ (1/5)</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label for="newCover" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1">কভার ইমেজ লিংক (URL)</label>
+                    <input type="url" id="newCover" placeholder="https://example.com/cover.jpg" class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-sm focus:ring-2 focus:ring-aliBlue focus:outline-none">
+                </div>
+                <div>
+                    <label for="newTags" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1">ট্যাগ (কমা দিয়ে আলাদা করুন)</label>
+                    <input type="text" id="newTags" placeholder="Productivity, Mindset" class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-sm focus:ring-2 focus:ring-aliBlue focus:outline-none">
+                </div>
+                <div>
+                    <label for="newSummary" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1">সংক্ষিপ্ত সমsummary / নোট</label>
+                    <textarea id="newSummary" rows="3" placeholder="বইটির সংক্ষেপ বা মূল শিক্ষা সংক্ষেপে লিখুন..." class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-sm focus:ring-2 focus:ring-aliBlue focus:outline-none"></textarea>
+                </div>
+
+                <div class="pt-2 flex justify-end gap-3">
+                    <button type="button" onclick="closeAddBookModal()" class="px-5 py-2.5 rounded-xl border border-stone-200 text-xs font-bold text-stone-600 hover:bg-stone-50">বাতিল</button>
+                    <button type="submit" class="px-5 py-2.5 rounded-xl bg-aliOrange text-white text-xs font-bold hover:bg-aliOrangeHover shadow-sm">সংরক্ষণ করুন</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Consolidated JavaScript Application -->
+    <script>
+        /* ---------- Utilities & Safety ---------- */
+        const STORAGE_KEY = 'ariful_reading_tracker_books';
+
+        function safeText(v, fallback = '') {
+            return (v ?? fallback).toString();
+        }
+
+        function escapeHtml(str) {
+            return safeText(str)
+                .replaceAll('&', '&amp;')
+                .replaceAll('<', '&lt;')
+                .replaceAll('>', '&gt;')
+                .replaceAll('"', '&quot;')
+                .replaceAll("'", '&#39;');
+        }
+
+        function normalizeStatus(status) {
+            const s = safeText(status).toLowerCase().trim();
+            if (s === 'finished' || s === 'reading' || s === 'want') return s;
+            return 'want';
+        }
+
+        function statusLabel(status) {
+            switch (normalizeStatus(status)) {
+                case 'finished': return 'পড়া শেষ';
+                case 'reading': return 'এখন পড়ছি';
+                default: return 'পড়তে চাই';
+            }
+        }
+
+        function statusBadgeHtml(status) {
+            const s = normalizeStatus(status);
+            if (s === 'finished') {
+                return `<span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">পড়া শেষ</span>`;
+            }
+            if (s === 'reading') {
+                return `<span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider animate-pulse">এখন পড়ছি</span>`;
+            }
+            return `<span class="bg-stone-100 text-stone-600 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">পড়তে চাই</span>`;
+        }
+
+        function generateId() {
+            return String(Date.now()) + '-' + Math.random().toString(36).slice(2, 8);
+        }
+
+        /* ---------- Gemini API Integration ---------- */
+        async function fetchGeminiAPI(payload) {
+            const apiKey = "";
+            if (!apiKey) {
+                throw new Error('AI API Key configured via standard environment variable.');
+            }
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+            
+            let retries = 0;
+            const maxRetries = 3;
+            let delay = 1000;
+
+            while (retries < maxRetries) {
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        if (response.status === 429 || response.status >= 500) {
+                            throw new Error(`HTTP ${response.status}`);
+                        }
+                        const errData = await response.json().catch(() => ({}));
+                        throw new Error(errData?.error?.message || 'Gemini API Error');
+                    }
+
+                    return await response.json();
+                } catch (error) {
+                    retries++;
+                    if (retries >= maxRetries) throw error;
+                    await new Promise(res => setTimeout(res, delay));
+                    delay *= 2;
+                }
+            }
+        }
+
+        /* ---------- Default Books Data ---------- */
+        const initialBooks = [
+            {
+                id: '1',
+                title: 'Atomic Habits',
+                author: 'James Clear',
+                status: 'finished',
+                rating: 5,
+                cover: 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1655988385i/37352931.jpg',
+                tags: ['Productivity', 'Self-Improvement'],
+                dateFinished: 'জানুয়ারি ২০২৬',
+                summary: 'ক্ষুদ্র পরিবর্তন কীভাবে জীবনে বিশাল ফলাফল এনে দিতে পারে, তার এক অসাধারণ নির্দেশিকা।',
+                keyTakeaways: [
+                    'আপনি আপনার লক্ষ্যের মতো বড় হন না, আপনার সিস্টেমের স্তরে নেমে যান।',
+                    'প্রতিদিন ১% ভালো হওয়া মানে এক বছরে ৩৭ গুণ উন্নত হওয়া।',
+                    'অভ্যাস তৈরির ৪টি ধাপ: Cue, Craving, Response, Reward।'
+                ],
+                quote: 'You do not rise to the level of your goals. You fall to the level of your systems.'
+            },
+            {
+                id: '2',
+                title: 'Feel-Good Productivity',
+                author: 'Ali Abdaal',
+                status: 'finished',
+                rating: 5,
+                cover: 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1689255823i/150247395.jpg',
+                tags: ['Productivity', 'Mindset'],
+                dateFinished: 'ফেব্রুয়ারি ২০২৬',
+                summary: 'কঠোর পরিশ্রম নয়, বরং কাজকে আনন্দদায়ক করার মাধ্যমে কীভাবে দীর্ঘমেয়াদী সফলতা পাওয়া যায়।',
+                keyTakeaways: [
+                    'আনন্দই হলো প্রোডাক্টিভিটির আসল জ্বালানি (Play, Power, Power Principles)।',
+                    'যে কাজ আপনাকে আনন্দ দেয় না, সেটিতে দীর্ঘমেয়াদে ধারাবাহিক থাকা কঠিন।',
+                    'বার্নআউট রোধ করতে সময়মতো বিশ্রাম নেওয়া শিখতে হবে।'
+                ],
+                quote: 'Productivity isn’t about working harder. It’s about making work feel good.'
+            },
+            {
+                id: '3',
+                title: 'The Psychology of Money',
+                author: 'Morgan Housel',
+                status: 'finished',
+                rating: 5,
+                cover: 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1581527774i/41881472.jpg',
+                tags: ['Finance', 'Psychology'],
+                dateFinished: 'মার্চ ২০২৬',
+                summary: 'অর্থ ব্যবস্থাপনার ক্ষেত্রে গাণিতিক দক্ষতার চেয়ে আমাদের মানসিক আচরণ অনেক বেশি ভূমিকা রাখে।',
+                keyTakeaways: [
+                    'সম্পদ অর্জনের চেয়ে তা ধরে রাখা বেশি কঠিন।',
+                    'কম্পাউন্ডিংয়ের জাদু সময়ের সাথে সাথে দৃশ্যমান হয়।',
+                    'আসল ধনী তারাই, যাদের সময় নিয়ন্ত্রণ করার স্বাধীনতা রয়েছে।'
+                ],
+                quote: 'Spending money to show people how much money you have is the fastest way to have less money.'
+            },
+            {
+                id: '4',
+                title: 'Deep Work',
+                author: 'Cal Newport',
+                status: 'reading',
+                rating: 4,
+                cover: 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1447957962i/25744928.jpg',
+                tags: ['Focus', 'Career'],
+                dateFinished: '',
+                summary: 'ডিজিটাল ডিস্ট্রাকশনের যুগে মনযোগ ধরে রেখে গভীর ও মানসম্পন্ন কাজ করার কৌশল।',
+                keyTakeaways: [
+                    'ডিপ ওয়ার্ক বা গভীর মনোযোগের কাজই ভবিষ্যৎ অর্থনীতিতে বিরল এবং মূল্যবান দক্ষতা।',
+                    'সোশ্যাল মিডিয়া ও নোটিফিকেশন আমাদের মনোযোগের ক্ষমতা ধ্বংস করে।'
+                ],
+                quote: 'If you don’t produce, you won’t thrive—no matter how gifted or talented you are.'
+            },
+            {
+                id: '5',
+                title: 'Show Your Work!',
+                author: 'Austin Kleon',
+                status: 'finished',
+                rating: 5,
+                cover: 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1388188177i/18290401.jpg',
+                tags: ['Creativity', 'Branding'],
+                dateFinished: 'এপ্রিল ২০২৬',
+                summary: 'নিজের কাজ ও শেখার প্রক্রিয়া কীভাবে জনসমক্ষে শেয়ার করে ব্যক্তিগত ব্র্যান্ড তৈরি করা যায়।',
+                keyTakeaways: [
+                    'এক্সপার্ট হওয়ার প্রয়োজন নেই, একজন শিক্ষানবিশ হিসেবেও শেখার জার্নি শেয়ার করা যায়।',
+                    'প্রতিদিন আপনার কাজের পেছনের গল্প (Behind the scenes) শেয়ার করুন।'
+                ],
+                quote: 'Share what you love, and the people who love the same things will find you.'
+            }
+        ];
+
+        /* ---------- Global State ---------- */
+        let books = [];
+        let currentFilter = 'all';
+
+        /* ---------- App Initialization ---------- */
+        function initApp() {
+            try {
+                const savedBooks = localStorage.getItem(STORAGE_KEY);
+                if (savedBooks) {
+                    const parsed = JSON.parse(savedBooks);
+                    books = Array.isArray(parsed) ? parsed : [...initialBooks];
+                } else {
+                    books = [...initialBooks];
+                    saveToLocalStorage();
+                }
+            } catch (e) {
+                books = [...initialBooks];
+            }
+
+            sanitizeBooks();
+            renderBooks();
+            updateStats();
+            setupSearch();
+            setupMobileMenu();
+            bindFilterButtons();
+            setupModalBackdropClose();
+        }
+
+        function sanitizeBooks() {
+            books = books.map((b, idx) => ({
+                id: safeText(b.id || generateId() || String(idx + 1)),
+                title: safeText(b.title || 'Untitled'),
+                author: safeText(b.author || 'Unknown'),
+                status: normalizeStatus(b.status),
+                rating: Math.max(0, Math.min(5, Number(b.rating || 0))),
+                cover: safeText(b.cover || 'https://placehold.co/200x300/F5F0E8/1E1E1E?text=Book+Cover'),
+                tags: Array.isArray(b.tags) ? b.tags.map(t => safeText(t)).filter(Boolean) : ['General'],
+                dateFinished: safeText(b.dateFinished || ''),
+                summary: safeText(b.summary || ''),
+                keyTakeaways: Array.isArray(b.keyTakeaways) ? b.keyTakeaways.map(k => safeText(k)).filter(Boolean) : [],
+                quote: safeText(b.quote || '')
+            }));
+        }
+
+        function saveToLocalStorage() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(books));
+        }
+
+        function renderBooks(searchTerm = '') {
+            const grid = document.getElementById('booksGrid');
+            const emptyState = document.getElementById('emptyState');
+            if (!grid || !emptyState) return;
+
+            grid.innerHTML = '';
+            const q = safeText(searchTerm).toLowerCase();
+
+            const filtered = books.filter(book => {
+                const matchesFilter =
+                    currentFilter === 'all' ? true :
+                    currentFilter === 'favorite' ? book.rating === 5 :
+                    book.status === currentFilter;
+
+                const matchesSearch =
+                    book.title.toLowerCase().includes(q) ||
+                    book.author.toLowerCase().includes(q) ||
+                    book.tags.some(t => t.toLowerCase().includes(q));
+
+                return matchesFilter && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                emptyState.classList.remove('hidden');
+            } else {
+                emptyState.classList.add('hidden');
+                filtered.forEach(book => grid.appendChild(createBookCard(book)));
+            }
+
+            updateFilterCounts();
+        }
+
+        function createBookCard(book) {
+            const card = document.createElement('div');
+            card.className = "bg-white rounded-3xl border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between group cursor-pointer";
+            card.addEventListener('click', () => openBookModal(book.id));
+
+            let stars = '';
+            if (book.rating > 0) {
+                for (let i = 1; i <= 5; i++) {
+                    stars += `<i class="fa-solid fa-star ${i <= book.rating ? 'text-aliYellow' : 'text-stone-200'} text-xs"></i>`;
+                }
+            }
+
+            card.innerHTML = `
+                <div class="p-5 flex gap-4">
+                    <div class="w-24 h-36 flex-shrink-0 bg-stone-100 rounded-2xl overflow-hidden shadow-sm relative group-hover:scale-105 transition-transform">
+                        <img src="${escapeHtml(book.cover)}" alt="${escapeHtml(book.title)}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/200x300/F5F0E8/1E1E1E?text=Book+Cover'">
+                    </div>
+
+                    <div class="flex-grow flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-2">
+                                ${statusBadgeHtml(book.status)}
+                                ${book.rating ? `<div class="flex items-center gap-0.5">${stars}</div>` : ''}
+                            </div>
+                            <h3 class="font-serif font-bold text-aliDark text-lg leading-snug group-hover:text-aliOrange transition-colors line-clamp-2">
+                                ${escapeHtml(book.title)}
+                            </h3>
+                            <p class="text-xs text-stone-500 font-medium mt-1">লেখক: ${escapeHtml(book.author)}</p>
+                        </div>
+
+                        <div class="flex flex-wrap gap-1 mt-3">
+                            ${book.tags.map(t => `<span class="bg-aliBg text-stone-600 text-[10px] px-2 py-0.5 rounded-md font-semibold border border-stone-200/50">${escapeHtml(t)}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="px-5 py-3 bg-aliBg border-t border-stone-100 text-xs text-stone-600 line-clamp-2 italic">
+                    "${escapeHtml(book.summary || 'কোনো নোট দেওয়া হয়নি।')}"
+                </div>
+            `;
+
+            return card;
+        }
+
+        /* ---------- Filtering & Stats ---------- */
+        function filterBooks(type, clickedBtn = null) {
+            currentFilter = type;
+
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('bg-aliDark', 'text-white');
+                btn.classList.add('bg-white', 'text-stone-600');
+            });
+
+            if (clickedBtn) {
+                clickedBtn.classList.remove('bg-white', 'text-stone-600');
+                clickedBtn.classList.add('bg-aliDark', 'text-white');
+            }
+
+            const searchVal = document.getElementById('searchInput')?.value || '';
+            renderBooks(searchVal);
+        }
+
+        function bindFilterButtons() {
+            const wrap = document.querySelector('#books .flex.flex-wrap.gap-2');
+            if (!wrap) return;
+            const btns = wrap.querySelectorAll('.filter-btn');
+            const types = ['all', 'finished', 'reading', 'want', 'favorite'];
+
+            btns.forEach((btn, idx) => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    filterBooks(types[idx] || 'all', btn);
+                });
+            });
+        }
+
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            if (!searchInput) return;
+            searchInput.addEventListener('input', (e) => {
+                renderBooks(e.target.value);
+            });
+        }
+
+        function updateStats() {
+            const total = books.length;
+            const finished = books.filter(b => b.status === 'finished').length;
+            const reading = books.filter(b => b.status === 'reading').length;
+            const want = books.filter(b => b.status === 'want').length;
+            const topRated = books.filter(b => b.rating === 5).length;
+
+            const statTotalBooks = document.getElementById('statTotalBooks');
+            const statReadingNow = document.getElementById('statReadingNow');
+            const statTopRated = document.getElementById('statTopRated');
+            const statWantToRead = document.getElementById('statWantToRead');
+            const yearlyCount = document.getElementById('yearlyCount');
+
+            if (statTotalBooks) statTotalBooks.innerText = total;
+            if (statReadingNow) statReadingNow.innerText = reading;
+            if (statTopRated) statTopRated.innerText = topRated;
+            if (statWantToRead) statWantToRead.innerText = want;
+            if (yearlyCount) yearlyCount.innerText = finished;
+        }
+
+        function updateFilterCounts() {
+            const all = document.getElementById('count-all');
+            const finished = document.getElementById('count-finished');
+            const reading = document.getElementById('count-reading');
+            const want = document.getElementById('count-want');
+
+            if (all) all.innerText = books.length;
+            if (finished) finished.innerText = books.filter(b => b.status === 'finished').length;
+            if (reading) reading.innerText = books.filter(b => b.status === 'reading').length;
+            if (want) want.innerText = books.filter(b => b.status === 'want').length;
+        }
+
+        /* ---------- Modal Controls ---------- */
+        function openBookModal(id) {
+            const book = books.find(b => b.id === id);
+            if (!book) return;
+
+            const modal = document.getElementById('bookModal');
+            const content = document.getElementById('modalContent');
+            if (!modal || !content) return;
+
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                stars += `<i class="fa-solid fa-star ${i <= book.rating ? 'text-aliYellow' : 'text-stone-200'} text-base"></i>`;
+            }
+
+            const safeTitle = escapeHtml(book.title);
+            const safeAuthor = escapeHtml(book.author);
+            const safeSummary = escapeHtml(book.summary || 'কোনো নোট দেওয়া হয়নি।');
+
+            content.innerHTML = `
+                <div class="flex flex-col sm:flex-row gap-6 items-start">
+                    <img src="${escapeHtml(book.cover)}" alt="${safeTitle}" class="w-32 h-48 object-cover rounded-2xl shadow-md border border-stone-100 flex-shrink-0" onerror="this.src='https://placehold.co/200x300/F5F0E8/1E1E1E?text=Book+Cover'">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-aliYellow text-aliDark text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">${statusLabel(book.status)}</span>
+                            ${book.dateFinished ? `<span class="text-xs text-stone-400">• শেষ করা হয়েছে: ${escapeHtml(book.dateFinished)}</span>` : ''}
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl font-serif font-bold text-aliDark">${safeTitle}</h2>
+                        <p class="text-base font-semibold text-stone-600 mt-1">লেখক: ${safeAuthor}</p>
+
+                        <div class="flex items-center gap-1 mt-3">
+                            ${stars}
+                            <span class="text-sm text-stone-500 font-bold ml-2">${book.rating}/5</span>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            ${book.tags.map(t => `<span class="bg-aliBg text-stone-700 text-xs font-semibold px-2.5 py-1 rounded-lg border border-stone-200">${escapeHtml(t)}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 space-y-6">
+                    <div>
+                        <h4 class="text-xs font-bold text-stone-400 uppercase tracking-wider mb-2">সংক্ষিপ্ত নোট</h4>
+                        <p class="text-stone-700 leading-relaxed text-base bg-aliBg p-4 rounded-2xl border border-stone-200/80">${safeSummary}</p>
+                    </div>
+
+                    ${book.keyTakeaways?.length ? `
+                        <div>
+                            <h4 class="text-xs font-bold text-stone-400 uppercase tracking-wider mb-2"><i class="fa-solid fa-lightbulb text-aliYellow mr-1"></i> মূল শিক্ষা (Key Takeaways)</h4>
+                            <ul class="space-y-2">
+                                ${book.keyTakeaways.map(k => `<li class="flex items-start gap-2 text-sm text-stone-700"><i class="fa-solid fa-check text-emerald-600 mt-1 text-xs"></i> <span>${escapeHtml(k)}</span></li>`).join('')}
+                            </ul>
+                        </div>
+                    ` : ''}
+
+                    ${book.quote ? `
+                        <div>
+                            <h4 class="text-xs font-bold text-stone-400 uppercase tracking-wider mb-2">প্রিয় উদ্ধৃতি (Favorite Quote)</h4>
+                            <blockquote class="border-l-4 border-aliOrange pl-4 py-2 italic text-stone-800 text-base font-serif bg-orange-50/50 rounded-r-xl">
+                                "${escapeHtml(book.quote)}"
+                            </blockquote>
+                        </div>
+                    ` : ''}
+
+                    <div class="bg-gradient-to-r from-amber-50 to-orange-50 p-5 rounded-2xl border border-amber-200/80">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-bold text-amber-900 uppercase tracking-wider flex items-center gap-1.5">
+                                <i class="fa-solid fa-wand-magic-sparkles text-aliOrange"></i> ✨ AI Deep Dive Analysis
+                            </span>
+                            <button onclick="askAiAboutBook('${book.title.replace(/'/g, "\\'")}', '${book.author.replace(/'/g, "\\'")}')" id="aiDeepDiveBtn" class="bg-aliOrange hover:bg-aliOrangeHover text-white text-xs font-bold px-3 py-2 rounded-xl transition-all shadow-sm">
+                                জীবনধারায় প্রয়োগের উপায় জানতে ক্লিক করুন
+                            </button>
+                        </div>
+                        <div id="aiDeepDiveResult" class="text-xs text-stone-700 leading-relaxed space-y-2 hidden"></div>
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-4 border-t border-stone-100 flex justify-between items-center">
+                    <button onclick="deleteBook('${book.id}')" class="text-red-500 hover:text-red-700 text-xs font-bold flex items-center gap-1">
+                        <i class="fa-regular fa-trash-can"></i> মুছে ফেলুন
+                    </button>
+                    <button onclick="closeBookModal()" class="bg-aliDark text-white text-xs font-bold px-6 py-2.5 rounded-xl">বন্ধ করুন</button>
+                </div>
+            `;
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeBookModal() {
+            const modal = document.getElementById('bookModal');
+            if (!modal) return;
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = 'auto';
+        }
+
+        function openAddBookModal() {
+            const modal = document.getElementById('addBookModal');
+            if (!modal) return;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAddBookModal() {
+            const modal = document.getElementById('addBookModal');
+            if (!modal) return;
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = 'auto';
+        }
+
+        function handleAddNewBook(event) {
+            event.preventDefault();
+
+            const title = document.getElementById('newTitle')?.value?.trim() || '';
+            const author = document.getElementById('newAuthor')?.value?.trim() || '';
+            const status = normalizeStatus(document.getElementById('newStatus')?.value || 'want');
+            const rating = Number(document.getElementById('newRating')?.value || 0);
+            const cover = document.getElementById('newCover')?.value?.trim() || 'https://placehold.co/200x300/F5F0E8/1E1E1E?text=Book+Cover';
+            const tagsRaw = document.getElementById('newTags')?.value || '';
+            const summary = document.getElementById('newSummary')?.value?.trim() || '';
+
+            if (!title || !author) {
+                alert('বইয়ের নাম এবং লেখকের নাম অবশ্যই দিতে হবে।');
+                return;
+            }
+
+            const tags = tagsRaw.split(',').map(t => t.trim()).filter(Boolean);
+
+            const newBook = {
+                id: generateId(),
+                title,
+                author,
+                status,
+                rating: Math.max(0, Math.min(5, rating)),
+                cover,
+                tags: tags.length ? tags : ['General'],
+                dateFinished: status === 'finished' ? new Date().toLocaleDateString('bn-BD', { month: 'long', year: 'numeric' }) : '',
+                summary,
+                keyTakeaways: [],
+                quote: ''
+            };
+
+            books.unshift(newBook);
+            saveToLocalStorage();
+            renderBooks(document.getElementById('searchInput')?.value || '');
+            updateStats();
+
+            const form = event.target;
+            if (form && typeof form.reset === 'function') form.reset();
+
+            closeAddBookModal();
+        }
+
+        function deleteBook(id) {
+            const ok = confirm('আপনি কি নিশ্চিতভাবে এই বইটি মুছে ফেলতে চান?');
+            if (!ok) return;
+
+            books = books.filter(b => b.id !== id);
+            saveToLocalStorage();
+            renderBooks(document.getElementById('searchInput')?.value || '');
+            updateStats();
+            closeBookModal();
+        }
+
+        /* ---------- AI Integration Handlers ---------- */
+        async function autoFillWithAI() {
+            const titleInput = document.getElementById('newTitle');
+            const authorInput = document.getElementById('newAuthor');
+            const summaryInput = document.getElementById('newSummary');
+            const tagsInput = document.getElementById('newTags');
+
+            const title = titleInput?.value?.trim() || '';
+            const author = authorInput?.value?.trim() || '';
+
+            if (!title) {
+                alert('প্রথমে বইয়ের নাম (Title) লিখুন, তারপর AI Auto-Fill ব্যবহার করুন।');
+                return;
+            }
+
+            const btn = document.getElementById('aiAutofillBtn');
+            const origHtml = btn.innerHTML;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> জেনারেট হচ্ছে...`;
+            btn.disabled = true;
+
+            const userPrompt = `A book titled "${title}" ${author ? 'by ' + author : ''}. Provide JSON with Bengali summary and English tags string array. JSON schema format: {"summary": "...", "tags": ["tag1", "tag2"]}`;
+
+            const payload = {
+                contents: [{ parts: [{ text: userPrompt }] }],
+                systemInstruction: {
+                    parts: [{ text: "You are a helpful book assistant. Reply ONLY with valid JSON having key summary (Bengali text 2-3 sentences) and tags (array of English strings)." }]
+                }
+            };
+
+            try {
+                const result = await fetchGeminiAPI(payload);
+                const rawText = result?.candidates?.[0]?.content?.parts?.[0]?.text || '{}';
+                const jsonMatch = rawText.match(/\{[\s\S]*\}/)?.[0] || '{}';
+                const data = JSON.parse(jsonMatch);
+
+                if (data.summary && summaryInput) summaryInput.value = data.summary;
+                if (data.tags && Array.isArray(data.tags) && tagsInput) tagsInput.value = data.tags.join(', ');
+            } catch (err) {
+                console.error("AI Auto-Fill Error:", err);
+                alert("AI জেনারেশনে সমস্যা হয়েছে। অনুগ্রহ করে ম্যানুয়ালি তথ্যগুলো পূরণ করুন।");
+            } finally {
+                btn.innerHTML = origHtml;
+                btn.disabled = false;
+            }
+        }
+
+        async function askAiAboutBook(title, author) {
+            const btn = document.getElementById('aiDeepDiveBtn');
+            const result = document.getElementById('aiDeepDiveResult');
+            if (!btn || !result) return;
+
+            btn.disabled = true;
+            result.classList.remove('hidden');
+            result.innerHTML = `<div class="text-amber-800 font-medium animate-pulse"><i class="fa-solid fa-wand-magic-sparkles"></i> Gemini AI থেকে বইটির প্রয়োগমূলক বিশ্লেষণ আসছে...</div>`;
+
+            const prompt = `Explain how a reader can apply the top principles from the book "${title}" by ${author} in their daily personal & work life. Write concise, actionable bullet points in warm Bengali.`;
+
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+                systemInstruction: {
+                    parts: [{ text: "You are Ali Abdaal's AI assistant. Give practical, actionable productivity advice in Bengali." }]
+                }
+            };
+
+            try {
+                const data = await fetchGeminiAPI(payload);
+                const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || 'কোনো বিশ্লেষণ পাওয়া যায়নি।';
+                result.innerHTML = `<div class="bg-white/90 p-3 rounded-xl text-stone-800 border border-amber-200/60 leading-relaxed whitespace-pre-line">${escapeHtml(reply)}</div>`;
+            } catch (err) {
+                result.innerHTML = `<div class="text-red-600 font-semibold">এআই সার্ভিস এখন অনুপলব্ধ। কিছুক্ষণ পর চেষ্টা করুন।</div>`;
+                console.error(err);
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        function setAiPrompt(text) {
+            const input = document.getElementById('aiChatInput');
+            if (!input) return;
+            input.value = text;
+            input.focus();
+        }
+
+        async function handleAiChatSubmit(e) {
+            e.preventDefault();
+            const input = document.getElementById('aiChatInput');
+            const submitBtn = document.getElementById('aiChatSubmitBtn');
+            const chatBox = document.getElementById('aiChatBox');
+            if (!input || !submitBtn || !chatBox) return;
+
+            const query = input.value.trim();
+            if (!query) return;
+
+            // Render User Message
+            const userMsgHtml = `
+                <div class="flex gap-3 justify-end">
+                    <div class="bg-aliDark text-white p-3 rounded-2xl rounded-tr-none text-stone-100 leading-relaxed max-w-[85%]">
+                        ${escapeHtml(query)}
+                    </div>
+                    <div class="w-8 h-8 rounded-full bg-aliOrange text-white flex items-center justify-center font-bold text-xs flex-shrink-0">
+                        ইউজার
+                    </div>
+                </div>
+            `;
+            chatBox.insertAdjacentHTML('beforeend', userMsgHtml);
+            input.value = '';
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            // Loading state
+            const loadingId = 'loading-' + Date.now();
+            const loadingHtml = `
+                <div id="${loadingId}" class="flex gap-3">
+                    <div class="w-8 h-8 rounded-full bg-aliBlue text-white flex items-center justify-center font-bold text-xs flex-shrink-0">
+                        AI
+                    </div>
+                    <div class="bg-white p-3 rounded-2xl rounded-tl-none border border-stone-200/60 shadow-sm text-stone-500 italic flex items-center gap-2">
+                        <i class="fa-solid fa-spinner fa-spin text-aliOrange"></i> আরিফুলের লাইব্রেরি থেকে তথ্য খুঁজছি...
+                    </div>
+                </div>
+            `;
+            chatBox.insertAdjacentHTML('beforeend', loadingHtml);
+            chatBox.scrollTop = chatBox.scrollHeight;
+            submitBtn.disabled = true;
+
+            const context = books.map(b => `Title: ${b.title}, Author: ${b.author}, Rating: ${b.rating}/5, Status: ${b.status}`).join('\n');
+            const systemPrompt = `You are Ariful's AI Reading Companion on his personal blog. Ariful follows Ali Abdaal's philosophy of productivity and active reading.
+Ariful's current library:\n${context}\n
+Answer user questions about books, productivity, and reading habits in friendly Bengali under 150 words.`;
+
+            const payload = {
+                contents: [{ parts: [{ text: query }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] }
+            };
+
+            try {
+                const responseData = await fetchGeminiAPI(payload);
+                const aiText = responseData?.candidates?.[0]?.content?.parts?.[0]?.text || 'দুঃখিত, কোনো উত্তর দেওয়া সম্ভব হয়নি।';
+
+                document.getElementById(loadingId)?.remove();
+
+                const aiMsgHtml = `
+                    <div class="flex gap-3">
+                        <div class="w-8 h-8 rounded-full bg-aliBlue text-white flex items-center justify-center font-bold text-xs flex-shrink-0">
+                            AI
+                        </div>
+                        <div class="bg-white p-3 rounded-2xl rounded-tl-none border border-stone-200/60 shadow-sm text-stone-700 leading-relaxed max-w-[85%] whitespace-pre-line">
+                            ${escapeHtml(aiText)}
+                        </div>
+                    </div>
+                `;
+                chatBox.insertAdjacentHTML('beforeend', aiMsgHtml);
+            } catch (err) {
+                console.error("AI Chat Error:", err);
+                document.getElementById(loadingId)?.remove();
+                const errorHtml = `
+                    <div class="flex gap-3">
+                        <div class="w-8 h-8 rounded-full bg-red-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">!</div>
+                        <div class="bg-red-50 text-red-700 p-3 rounded-2xl rounded-tl-none border border-red-200 text-xs">
+                            এআই সার্ভারের সাথে সংযোগ বিচ্ছিন্ন। পরে চেষ্টা করুন।
+                        </div>
+                    </div>
+                `;
+                chatBox.insertAdjacentHTML('beforeend', errorHtml);
+            } finally {
+                submitBtn.disabled = false;
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        }
+
+        /* ---------- Helper Listeners ---------- */
+        function handleSubscribe(e) {
+            e.preventDefault();
+            const msg = document.getElementById('subMessage');
+            if (msg) msg.classList.remove('hidden');
+            e.target?.reset?.();
+            setTimeout(() => {
+                if (msg) msg.classList.add('hidden');
+            }, 4000);
+        }
+
+        function setupMobileMenu() {
+            const btn = document.getElementById('mobileMenuBtn');
+            const menu = document.getElementById('mobileMenu');
+            if (!btn || !menu) return;
+
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+
+            menu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => menu.classList.add('hidden'));
+            });
+        }
+
+        function setupModalBackdropClose() {
+            const bookModal = document.getElementById('bookModal');
+            const addBookModal = document.getElementById('addBookModal');
+
+            if (bookModal) {
+                bookModal.addEventListener('click', (e) => {
+                    if (e.target === bookModal) closeBookModal();
+                });
+            }
+            if (addBookModal) {
+                addBookModal.addEventListener('click', (e) => {
+                    if (e.target === addBookModal) closeAddBookModal();
+                });
+            }
+        }
+
+        /* ---------- App Entry ---------- */
+        window.addEventListener('DOMContentLoaded', () => {
+            initApp();
+        });
+    </script>
+</body>
+</html>
