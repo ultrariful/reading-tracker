@@ -507,9 +507,10 @@
                     </div>
                 </div>
 
+                <!-- কভার ইমেজ ফাইল আপলোড ফিল্ড -->
                 <div>
-                    <label class="block text-xs font-bold text-stone-700 mb-1">কভার ইমেজ লিংক (URL)</label>
-                    <input type="url" id="formCover" placeholder="https://example.com/cover.jpg" class="w-full px-4 py-2.5 border border-stone-200 rounded-xl text-sm focus:ring-2 focus:ring-aliBlue outline-none">
+                    <label class="block text-xs font-bold text-stone-700 mb-1">ডিভাইস থেকে বইয়ের ছবি সিলেক্ট করুন</label>
+                    <input type="file" id="formCoverFile" accept="image/*" class="w-full px-3 py-2 border border-stone-200 rounded-xl text-sm bg-stone-50 focus:ring-2 focus:ring-aliBlue outline-none file:mr-4 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-aliDark file:text-white hover:file:bg-black cursor-pointer">
                 </div>
 
                 <div>
@@ -518,6 +519,26 @@
                 </div>
 
                 <div>
+                    <label class="block text-xs font-bold text-stone-700 mb-1">বইয়ের মূল উদ্ধৃতি / শর্ট নোট</label>
+                    <textarea id="formQuote" rows="2" placeholder="বইটির সুন্দর একটি বাক্য বা সংক্ষিপ্ত মন্তব্য..." class="w-full px-4 py-2.5 border border-stone-200 rounded-xl text-sm focus:ring-2 focus:ring-aliBlue outline-none"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-stone-700 mb-1">বিস্তারিত নোট / পয়েন্টসমূহ</label>
+                    <textarea id="formSummary" rows="3" placeholder="বই থেকে প্রধান প্রধান শিক্ষণীয় বিষয়গুলো লিখুন..." class="w-full px-4 py-2.5 border border-stone-200 rounded-xl text-sm focus:ring-2 focus:ring-aliBlue outline-none"></textarea>
+                </div>
+
+                <div class="pt-4 flex justify-end gap-3">
+                    <button type="button" onclick="closeModal('bookModal')" class="px-5 py-2.5 rounded-xl text-sm font-semibold text-stone-600 hover:bg-stone-100">
+                        বাতিল
+                    </button>
+                    <button type="submit" id="saveBookBtn" class="bg-aliOrange hover:bg-aliOrangeHover text-white px-6 py-2.5 rounded-xl text-sm font-bold shadow">
+                        সেভ করুন
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
                     <label class="block text-xs font-bold text-stone-700 mb-1">বইয়ের মূল উদ্ধৃতি / শর্ট নোট</label>
                     <textarea id="formQuote" rows="2" placeholder="বইটির সুন্দর একটি বাক্য বা সংক্ষিপ্ত মন্তব্য..." class="w-full px-4 py-2.5 border border-stone-200 rounded-xl text-sm focus:ring-2 focus:ring-aliBlue outline-none"></textarea>
                 </div>
@@ -862,116 +883,105 @@
             document.getElementById(modalId).classList.add('hidden');
         }
 
-        // Add/Edit Book Handler
-        function handleBookSubmit(event) {
-            event.preventDefault();
-            const id = document.getElementById('bookId').value;
-            const title = document.getElementById('formTitle').value;
-            const author = document.getElementById('formAuthor').value;
-            const status = document.getElementById('formStatus').value;
-            const rating = document.getElementById('formRating').value;
-            const cover = document.getElementById('formCover').value;
-            const tagsInput = document.getElementById('formTags').value;
-            const quote = document.getElementById('formQuote').value;
-            const summary = document.getElementById('formSummary').value;
+        // Add/Edit Book Handler (Updated for File Upload)
+async function handleBookSubmit(event) {
+    event.preventDefault();
+    const id = document.getElementById('bookId').value;
+    const title = document.getElementById('formTitle').value;
+    const author = document.getElementById('formAuthor').value;
+    const status = document.getElementById('formStatus').value;
+    const rating = document.getElementById('formRating').value;
+    const fileInput = document.getElementById('formCoverFile');
+    const tagsInput = document.getElementById('formTags').value;
+    const quote = document.getElementById('formQuote').value;
+    const summary = document.getElementById('formSummary').value;
 
-            const tags = tagsInput ? tagsInput.split(',').map(t => t.trim()) : [];
+    const tags = tagsInput ? tagsInput.split(',').map(t => t.trim()) : [];
 
-            if (id) {
-                // Update
-                const idx = booksData.findIndex(b => b.id === id);
-                if (idx !== -1) {
-                    booksData[idx] = { ...booksData[idx], title, author, status, rating, cover, tags, quote, summary };
-                    showToast('বইয়ের তথ্য আপডেট হয়েছে!');
-                }
-            } else {
-                // Add New
-                const newBook = {
-                    id: String(Date.now()),
-                    title, author, status, rating, cover, tags, quote, summary
-                };
-                booksData.unshift(newBook);
-                showToast('নতুন বই যুক্ত করা হয়েছে!');
-            }
+    // আগের বই খুঁজে পাওয়া (যদি এডিট মোড হয়)
+    let existingBook = booksData.find(b => b.id === id);
+    let coverBase64 = existingBook ? existingBook.cover : '';
 
-            saveBooksData();
-            renderUI();
-            closeModal('bookModal');
+    // যদি নতুন কোনো ছবি আপলোড করা হয়ে থাকে
+    if (fileInput.files && fileInput.files[0]) {
+        try {
+            coverBase64 = await convertFileToBase64(fileInput.files[0]);
+        } catch (e) {
+            showToast('ছবি প্রসেস করতে সমস্যা হয়েছে!');
+            return;
         }
+    }
 
-        function editBook(id) {
-            const book = booksData.find(b => b.id === id);
-            if (!book) return;
-
-            document.getElementById('modalTitle').innerText = 'বইয়ের তথ্য এডিট করুন';
-            document.getElementById('bookId').value = book.id;
-            document.getElementById('formTitle').value = book.title || '';
-            document.getElementById('formAuthor').value = book.author || '';
-            document.getElementById('formStatus').value = book.status || 'reading';
-            document.getElementById('formRating').value = book.rating || '5';
-            document.getElementById('formCover').value = book.cover || '';
-            document.getElementById('formTags').value = Array.isArray(book.tags) ? book.tags.join(', ') : (book.tags || '');
-            document.getElementById('formQuote').value = book.quote || '';
-            document.getElementById('formSummary').value = book.summary || '';
-
-            document.getElementById('bookModal').classList.remove('hidden');
+    if (id) {
+        // Update Existing Book
+        const idx = booksData.findIndex(b => b.id === id);
+        if (idx !== -1) {
+            booksData[idx] = { 
+                ...booksData[idx], 
+                title, 
+                author, 
+                status, 
+                rating, 
+                cover: coverBase64, 
+                tags, 
+                quote, 
+                summary 
+            };
+            showToast('বইয়ের তথ্য আপডেট হয়েছে!');
         }
+    } else {
+        // Add New Book
+        const newBook = {
+            id: String(Date.now()),
+            title, 
+            author, 
+            status, 
+            rating, 
+            cover: coverBase64, 
+            tags, 
+            quote, 
+            summary
+        };
+        booksData.unshift(newBook);
+        showToast('নতুন বই যুক্ত করা হয়েছে!');
+    }
 
-        function deleteBook(id) {
-            if (confirm("আপনি কি নিশ্চিত যে এই বইটি মুছে ফেলতে চান?")) {
-                booksData = booksData.filter(b => b.id !== id);
-                saveBooksData();
-                renderUI();
-                showToast('বইটি মুছে ফেলা হয়েছে');
-            }
-        }
+    saveBooksData();
+    renderUI();
+    closeModal('bookModal');
+}
 
-        function viewBook(id) {
-            const book = booksData.find(b => b.id === id);
-            if (!book) return;
+// File to Base64 Converter Helper Function
+function convertFileToBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
+}
 
-            const content = document.getElementById('viewModalContent');
-            const starsHtml = '⭐'.repeat(parseInt(book.rating || 5));
+// Edit Book Handler
+function editBook(id) {
+    const book = booksData.find(b => b.id === id);
+    if (!book) return;
 
-            content.innerHTML = `
-                <div class="flex flex-col sm:flex-row gap-6 items-start">
-                    <img src="${book.cover || 'https://placehold.co/300x450/F5F0E8/1E1E1E?text=Book'}" class="w-32 h-48 object-cover rounded-2xl shadow-md border border-stone-200">
-                    <div>
-                        <span class="text-xs font-bold text-aliOrange uppercase tracking-wider">${book.status === 'finished' ? 'পড়া শেষ' : (book.status === 'reading' ? 'এখন পড়ছি' : 'পড়তে চাই')}</span>
-                        <h2 class="text-2xl font-serif font-bold text-aliDark mt-1">${book.title}</h2>
-                        <p class="text-sm font-semibold text-stone-600 mt-1">লেখক: ${book.author}</p>
-                        <div class="text-sm mt-2">${starsHtml}</div>
-                    </div>
-                </div>
+    document.getElementById('modalTitle').innerText = 'বইয়ের তথ্য এডিট করুন';
+    document.getElementById('bookId').value = book.id;
+    document.getElementById('formTitle').value = book.title || '';
+    document.getElementById('formAuthor').value = book.author || '';
+    document.getElementById('formStatus').value = book.status || 'reading';
+    document.getElementById('formRating').value = book.rating || '5';
+    
+    // ছবি ইনপুট ফিল্ডটি খালি রাখা হচ্ছে (নতুন দিলে আপডেট হবে, না দিলে আগের ছবি থাকবে)
+    document.getElementById('formCoverFile').value = '';
+    
+    document.getElementById('formTags').value = Array.isArray(book.tags) ? book.tags.join(', ') : (book.tags || '');
+    document.getElementById('formQuote').value = book.quote || '';
+    document.getElementById('formSummary').value = book.summary || '';
 
-                ${book.quote ? `
-                    <div class="mt-6 p-4 bg-aliBg rounded-2xl border border-stone-200/80 italic text-sm text-stone-700">
-                        "${book.quote}"
-                    </div>
-                ` : ''}
-
-                <div class="mt-6">
-                    <h4 class="font-bold text-aliDark text-sm mb-2">সারসংক্ষেপ ও শেখা বিষয়:</h4>
-                    <p class="text-sm text-stone-600 leading-relaxed whitespace-pre-line">${book.summary || 'কোনো বিস্তারিত নোট লেখা হয়নি।'}</p>
-                </div>
-            `;
-
-            document.getElementById('viewModal').classList.remove('hidden');
-        }
-
-        function handleSubscribe(event) {
-            event.preventDefault();
-            const input = document.getElementById('newsletterEmail');
-            if (input && input.value) {
-                showToast('ধন্যবাদ! নিউজলেটার সাবস্ক্রিপশন সম্পন্ন হয়েছে।');
-                input.value = '';
-            }
-        }
-
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('hidden');
-        }
+    document.getElementById('bookModal').classList.remove('hidden');
+}
 
         // Smooth Custom Toast
         function showToast(msg) {
