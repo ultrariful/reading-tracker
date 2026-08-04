@@ -141,7 +141,7 @@
 
                             <!-- Image Container -->
                             <div class="relative w-64 h-64 sm:w-72 sm:h-72 rounded-full overflow-hidden border-4 border-white shadow-2xl animate-levitate z-10 bg-stone-100">
-                                <img id="profileImage" src="profile.jpg" alt="Ariful Photo" class="w-full h-full object-cover object-top"> 
+                                <img id="profileImage" src="ariful-profile.png" alt="Ariful Photo" class="w-full h-full object-cover object-top"> 
                                      alt="Ariful Photo" 
                                      class="w-full h-full object-cover object-top"
                                      onerror="this.src='https://placehold.co/400x400/FED156/1E1E1E?text=Ariful'">
@@ -670,19 +670,21 @@
         }
 
         function handlePinSubmit(event) {
-            event.preventDefault();
-            const pin = document.getElementById('adminPinInput').value;
-            // Secret Creator PIN check (Default PIN: 1234)
-            if (pin === '786786' || pin === 'ariful') {
-                isAdmin = true;
-                localStorage.setItem(ADMIN_STATE_KEY, 'true');
-                updateAdminUI();
-                closeModal('adminPinModal');
-                renderBooks();
-                showToast('ক্রিয়েটর অ্যাক্সেস আনলক হয়েছে!');
-            } else {
-                showToast('ভুল পিন নম্বর! আবার চেষ্টা করুন।');
-            }
+    event.preventDefault();
+    const pin = document.getElementById('adminPinInput').value;
+
+    // আপনার নতুন পিন '78678' এবং বিকল্প পিন 'ariful' চেক
+    if (pin === '78678' || pin === 'ariful') {
+        isAdmin = true;
+        localStorage.setItem(ADMIN_STATE_KEY, 'true');
+        updateAdminUI();
+        closeModal('adminPinModal');
+        renderBooks();
+        showToast('ক্রিয়েটর অ্যাক্সেস আনলক হয়েছে!');
+    } else {
+        showToast('ভুল পিন নম্বর! আবার চেষ্টা করুন।');
+    }
+}
         }
 
         function toggleAdminMode() {
