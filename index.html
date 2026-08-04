@@ -135,16 +135,13 @@
                     <!-- Left Column: Levitating Profile Avatar -->
                     <div class="md:col-span-5 flex justify-center order-1 md:order-1">
                         <div class="relative w-72 h-72 sm:w-80 sm:h-80 flex items-center justify-center">
-                            <!-- Background Yellow Blob -->
                             <div class="absolute inset-2 bg-aliYellow rounded-full -rotate-6 transform scale-105 shadow-inner"></div>
                             <div class="absolute -right-2 bottom-12 w-12 h-12 bg-aliYellow rounded-tr-3xl rotate-45 hidden sm:block"></div>
 
-                            <!-- Image Container -->
                             <div class="relative w-64 h-64 sm:w-72 sm:h-72 rounded-full overflow-hidden border-4 border-white shadow-2xl animate-levitate z-10 bg-stone-100">
                                 <img id="profileImage" src="assets/ariful-profile.png" alt="Ariful Photo" class="w-full h-full object-cover object-top" onerror="this.src='https://placehold.co/400x400/FED156/1E1E1E?text=Ariful'">
                             </div>
 
-                            <!-- Floating Reading Goal Badge -->
                             <div class="absolute -bottom-2 -right-2 sm:bottom-2 sm:right-0 bg-white px-4 py-2.5 rounded-2xl shadow-xl border border-stone-100 flex items-center gap-2.5 z-20">
                                 <span class="text-xl">📚</span>
                                 <div>
@@ -166,7 +163,6 @@
                             </p>
                         </div>
 
-                        <!-- CTA & Social Buttons Row -->
                         <div class="pt-2 flex flex-wrap items-center gap-4">
                             <a href="#books" class="bg-aliDark hover:bg-black text-white px-6 py-3.5 rounded-2xl font-semibold text-sm transition-all shadow-md hover:shadow-lg flex items-center gap-2.5">
                                 <i class="fa-solid fa-book-bookmark text-aliYellow"></i> বইগুলো দেখুন
@@ -201,7 +197,6 @@
                             </div>
                         </div>
 
-                        <!-- Featured Sub-Card -->
                         <div class="mt-8 bg-white p-6 rounded-3xl border border-stone-200/80 shadow-sm relative overflow-hidden">
                             <div class="flex items-start gap-4">
                                 <div class="w-12 h-12 rounded-2xl bg-sky-100 text-aliBlue flex items-center justify-center text-xl font-bold flex-shrink-0">
@@ -219,61 +214,6 @@
                             </div>
                         </div>
 
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- How Can I Help You Section -->
-        <section id="help" class="py-16 bg-white border-y border-stone-200/60">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-2xl mx-auto mb-12">
-                    <h2 class="text-3xl sm:text-4xl font-serif font-bold text-aliDark">
-                        How Can I <span class="wavy-underline text-aliBlue">Help You?</span>
-                    </h2>
-                    <p class="text-stone-600 mt-3 text-base">
-                        পড়া, শেখা এবং ব্যক্তিগত দক্ষতার বিকাশে কীভাবে এই প্ল্যাটফর্মটি আপনাকে সহায়তা করতে পারে
-                    </p>
-                </div>
-
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="bg-aliBg p-8 rounded-3xl border border-stone-200/70 hover:shadow-lg transition-all flex flex-col justify-between group">
-                        <div>
-                            <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">💡</div>
-                            <h3 class="text-xl font-serif font-bold text-aliDark mb-2">Be More Productive</h3>
-                            <p class="text-sm text-stone-600 leading-relaxed">
-                                কীভাবে সময় ঠিক রেখে প্রতিদিনের গুরুত্বপূর্ণ কাজগুলো আনন্দের সাথে সম্পন্ন করবেন তার কার্যকর কৌশল।
-                            </p>
-                        </div>
-                        <a href="#books" class="mt-6 inline-flex items-center text-xs font-bold text-aliDark group-hover:text-aliOrange gap-1">
-                            বইয়ের নোট দেখুন <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-                    </div>
-
-                    <div class="bg-aliBg p-8 rounded-3xl border border-stone-200/70 hover:shadow-lg transition-all flex flex-col justify-between group">
-                        <div>
-                            <div class="w-14 h-14 rounded-2xl bg-sky-100 text-aliBlue flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">📖</div>
-                            <h3 class="text-xl font-serif font-bold text-aliDark mb-2">Read Smartly</h3>
-                            <p class="text-sm text-stone-600 leading-relaxed">
-                                দ্রুত নয়, বরং গভীরভাবে পড়ে কীভাবে বইয়ের জ্ঞান আজীবন মনে রাখা যায় ও বাস্তবে প্রয়োগ করা যায়।
-                            </p>
-                        </div>
-                        <a href="#books" class="mt-6 inline-flex items-center text-xs font-bold text-aliDark group-hover:text-aliOrange gap-1">
-                            পড়ার পদ্ধতি জানুন <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-                    </div>
-
-                    <div class="bg-aliBg p-8 rounded-3xl border border-stone-200/70 hover:shadow-lg transition-all flex flex-col justify-between group">
-                        <div>
-                            <div class="w-14 h-14 rounded-2xl bg-orange-100 text-aliOrange flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">🚀</div>
-                            <h3 class="text-xl font-serif font-bold text-aliDark mb-2">Personal Branding</h3>
-                            <p class="text-sm text-stone-600 leading-relaxed">
-                                "Show Your Work" নীতি মেনে কীভাবে নিজের কাজ ও শেখন অভিজ্ঞতা সবার সামনে শেয়ার করে রিচ তৈরি করবেন।
-                            </p>
-                        </div>
-                        <a href="#articles" class="mt-6 inline-flex items-center text-xs font-bold text-aliDark group-hover:text-aliOrange gap-1">
-                            আর্টিকেলগুলো দেখুন <i class="fa-solid fa-arrow-right"></i>
-                        </a>
                     </div>
                 </div>
             </div>
@@ -314,14 +254,12 @@
                     </div>
 
                     <div class="flex items-center gap-3">
-                        <!-- Search Box -->
                         <div class="relative w-full md:w-72">
                             <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400 text-sm"></i>
                             <input type="text" id="searchInput" onkeyup="handleSearch()" placeholder="বই বা লেখকের নাম খুঁজুন..." 
                                    class="w-full pl-10 pr-4 py-2.5 bg-white border border-stone-200 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-aliBlue transition-all shadow-sm">
                         </div>
 
-                        <!-- Add Book Button (Hidden for visitors, visible ONLY for Creator/Admin) -->
                         <div id="adminAddContainer" class="hidden">
                             <button onclick="openAddBookModal()" class="bg-aliOrange hover:bg-aliOrangeHover text-white px-4 py-2.5 rounded-2xl text-sm font-bold shadow-sm transition-all whitespace-nowrap flex items-center gap-2">
                                 <i class="fa-solid fa-plus text-xs"></i> যোগ করুন
@@ -354,93 +292,12 @@
                     <!-- Books render dynamically -->
                 </div>
 
-                <!-- Empty State -->
                 <div id="emptyState" class="hidden text-center py-16 bg-white rounded-3xl border border-dashed border-stone-300">
                     <i class="fa-solid fa-book-open text-4xl text-stone-300 mb-3"></i>
                     <h3 class="text-lg font-bold text-stone-700">কোনো বই পাওয়া যায়নি!</h3>
                     <p class="text-sm text-stone-500 mt-1">অনুগ্রহ করে অন্য শব্দ দিয়ে সার্চ করুন অথবা ফিল্টার পরিবর্তন করুন।</p>
                 </div>
 
-            </div>
-        </section>
-
-        <!-- Featured Articles Section -->
-        <section id="articles" class="py-16 bg-aliDark text-white">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between items-end mb-10">
-                    <div>
-                        <span class="text-aliYellow text-xs font-bold uppercase tracking-widest">জ্ঞান চর্চা</span>
-                        <h2 class="text-3xl font-serif font-bold tracking-tight mt-1">সাম্প্রতিক আর্টিকেল ও ব্লগ</h2>
-                    </div>
-                </div>
-
-                <div class="grid md:grid-cols-3 gap-8">
-                    <article class="bg-[#2A2A2A] rounded-3xl p-6 border border-stone-800 hover:border-stone-700 transition-all flex flex-col justify-between">
-                        <div>
-                            <span class="text-xs text-stone-400">মে ২০২৬ • ৫ মিনিট পড়ার সময়</span>
-                            <h3 class="text-lg font-serif font-bold mt-2 mb-3 text-stone-100 hover:text-aliYellow transition-colors cursor-pointer">
-                                প্রতি সপ্তাহে একটি বই পড়ার সহজ ও কার্যকর পদ্ধতি
-                            </h3>
-                            <p class="text-sm text-stone-400 line-clamp-3">
-                                কীভাবে সময় বের করবেন এবং পড়ার গতি না বাড়িয়েও কীভাবে গভীরভাবে উপলব্ধি করে পড়ার অভ্যাস গড়ে তোলা যায়...
-                            </p>
-                        </div>
-                        <a href="#" class="mt-6 inline-flex items-center text-xs font-bold text-aliYellow hover:underline gap-1.5">
-                            পড়ুন <i class="fa-solid fa-arrow-right text-xs"></i>
-                        </a>
-                    </article>
-
-                    <article class="bg-[#2A2A2A] rounded-3xl p-6 border border-stone-800 hover:border-stone-700 transition-all flex flex-col justify-between">
-                        <div>
-                            <span class="text-xs text-stone-400">এপ্রিল ২০২৬ • ৪ মিনিট পড়ার সময়</span>
-                            <h3 class="text-lg font-serif font-bold mt-2 mb-3 text-stone-100 hover:text-aliYellow transition-colors cursor-pointer">
-                                কেন অ্যাক্টিভ নোট টেকিং দিয়ে বই পড়া প্রয়োজন?
-                            </h3>
-                            <p class="text-sm text-stone-400 line-clamp-3">
-                                সাধারণ আন্ডারলাইন করার চেয়ে নোট টেকিং সিস্টেম ব্যবহার করে কীভাবে বইয়ের গুরুত্বপূর্ণ বিষয়সমূহ আজীবন মনে রাখা যায়...
-                            </p>
-                        </div>
-                        <a href="#" class="mt-6 inline-flex items-center text-xs font-bold text-aliYellow hover:underline gap-1.5">
-                            পড়ুন <i class="fa-solid fa-arrow-right text-xs"></i>
-                        </a>
-                    </article>
-
-                    <article class="bg-[#2A2A2A] rounded-3xl p-6 border border-stone-800 hover:border-stone-700 transition-all flex flex-col justify-between">
-                        <div>
-                            <span class="text-xs text-stone-400">মার্চ ২০২৬ • ৭ মিনিট পড়ার সময়</span>
-                            <h3 class="text-lg font-serif font-bold mt-2 mb-3 text-stone-100 hover:text-aliYellow transition-colors cursor-pointer">
-                                ২০২৬ সালের আমার পড়া সেরা ৫টি প্রোডাক্টিভিটি বই
-                            </h3>
-                            <p class="text-sm text-stone-400 line-clamp-3">
-                                এই বছরের প্রথম কয়েক মাসে পড়া বইগুলোর মধ্যে যে ৫টি বই আমার প্রতিদিনের রুটিন ও চিন্তাভাবনা পুরোপুরি বদলে দিয়েছে...
-                            </p>
-                        </div>
-                        <a href="#" class="mt-6 inline-flex items-center text-xs font-bold text-aliYellow hover:underline gap-1.5">
-                            পড়ুন <i class="fa-solid fa-arrow-right text-xs"></i>
-                        </a>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- Newsletter Section -->
-        <section id="newsletter" class="py-20 bg-aliBg">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <div class="bg-white p-8 sm:p-12 rounded-3xl border border-stone-200/80 shadow-sm relative overflow-hidden">
-                    <span class="text-4xl mb-3 inline-block">📩</span>
-                    <h2 class="text-3xl font-serif font-bold text-aliDark">আমার ফ্রি ইমেইল নিউজলেটারে যুক্ত হন</h2>
-                    <p class="text-stone-600 mt-3 max-w-lg mx-auto text-sm sm:text-base">
-                        বইয়ের সারসংক্ষেপ, প্রোডাক্টিভিটি টিপস এবং আমার সাম্প্রতিক শেখাগুলো প্রতি সপ্তাহে পেয়ে যান সরাসরি আপনার ইমেইল ইনবক্সে।
-                    </p>
-
-                    <form onsubmit="handleSubscribe(event)" class="mt-8 flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-                        <input type="email" id="newsletterEmail" placeholder="আপনার ইমেইল এড্রেস লিখুন..." required 
-                               class="flex-grow px-5 py-3.5 bg-stone-50 border border-stone-200 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-aliOrange">
-                        <button type="submit" class="bg-aliOrange hover:bg-aliOrangeHover text-white px-7 py-3.5 rounded-2xl text-sm font-bold shadow transition-all whitespace-nowrap">
-                            সাবস্ক্রাইব
-                        </button>
-                    </form>
-                </div>
             </div>
         </section>
     </main>
@@ -455,7 +312,6 @@
             <div class="flex items-center gap-6 font-medium">
                 <a href="#about" class="hover:text-aliOrange">আমার সম্পর্কে</a>
                 <a href="#books" class="hover:text-aliOrange">বইয়ের শেলফ</a>
-                <!-- Discreet Creator Login Toggle -->
                 <button onclick="promptAdminLogin()" class="text-stone-400 hover:text-aliDark flex items-center gap-1 transition-colors">
                     <i class="fa-solid fa-lock text-[10px]"></i> ক্রিয়েটর এক্সেস
                 </button>
@@ -538,18 +394,6 @@
             </form>
         </div>
     </div>
-    <!-- View Book Details Modal -->
-    <div id="viewModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-3xl max-w-xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 shadow-2xl relative">
-            <button onclick="closeModal('viewModal')" class="absolute top-5 right-5 text-stone-400 hover:text-stone-700 text-xl p-2">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-
-            <div id="viewModalContent">
-                <!-- Dynamic view content -->
-            </div>
-        </div>
-    </div>
 
     <!-- Admin Pin Prompt Modal -->
     <div id="adminPinModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
@@ -562,7 +406,7 @@
                 <i class="fa-solid fa-lock"></i>
             </div>
             <h3 class="text-xl font-bold font-serif text-aliDark">ক্রিয়েটর এক্সেস</h3>
-            <p class="text-xs text-stone-500 mt-1 mb-4">নতুন বই যোগ বা এডিট করতে আপনার পিন বা সিক্রেট কোড লিখুন (ডিফল্ট: 1234)</p>
+            <p class="text-xs text-stone-500 mt-1 mb-4">নতুন বই যোগ বা এডিট করতে আপনার পিন নম্বর লিখুন</p>
 
             <form onsubmit="handlePinSubmit(event)" class="space-y-3">
                 <input type="password" id="adminPinInput" placeholder="পিন নম্বর লিখুন..." required autofocus
@@ -580,62 +424,60 @@
         <span id="toastMsg">মেসেজ</span>
     </div>
 
-    <!-- Application Logic Script -->
-    <script>
-        // Storage Keys
-        const STORAGE_KEY = 'ariful_books_collection_v2';
+    <!-- Firebase JS SDK & Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { 
+            getFirestore, 
+            collection, 
+            addDoc, 
+            doc, 
+            updateDoc, 
+            deleteDoc, 
+            onSnapshot 
+        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // Your Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDgxf4o8FZogObYHRll_QlMJ2hcpC2uCBw",
+            authDomain: "ultrariful-be43f.firebaseapp.com",
+            projectId: "ultrariful-be43f",
+            storageBucket: "ultrariful-be43f.firebasestorage.app",
+            messagingSenderId: "847788170391",
+            appId: "1:847788170391:web:5aaee38f71516af2bb37d2",
+            measurementId: "G-XT48X095HG"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const booksCollection = collection(db, "books");
+
+        // Global Variables
         const ADMIN_STATE_KEY = 'ariful_is_admin';
-
-        // Default Initial Books Data
-        const initialBooks = [
-            {
-                id: '1',
-                title: 'খলিফা ওমরের রাষ্ট্রনীতি',
-                author: 'আবদুস সাত্তার আশ-শাইখ',
-                status: 'reading',
-                rating: '5',
-                cover: 'https://placehold.co/300x450/F5F0E8/1E1E1E?text=Khulafa+Omar',
-                tags: ['Islamic', 'History', 'Law'],
-                quote: 'ন্যায়বিচারই রাষ্ট্রের সবচেয়ে মজবুত ভিত।',
-                summary: 'ইসলামী শাসনব্যবস্থা ও খলিফা ওমরের বিচক্ষণ বিচার পদ্ধতির বিস্তারিত আলোচনা।'
-            },
-            {
-                title: 'গল্পে গল্পে অর্থনীতি',
-                author: 'মোহাইমিন পাটোয়ারী',
-                status: 'reading',
-                rating: '5',
-                cover: 'https://placehold.co/300x450/F5F0E8/1E1E1E?text=Economics',
-                tags: ['Finance', 'Education'],
-                quote: 'অর্থনীতি কেবল হিসাব নয়, এটি মানুষের আচরণের বিজ্ঞান।',
-                summary: 'অর্থনীতির জটিল থিওরিগুলো সহজ রূপকথার মতো গল্পে গল্পে ব্যাখ্যা।'
-            },
-            {
-                id: '3',
-                title: 'Feel-Good Productivity',
-                author: 'Ali Abdaal',
-                status: 'finished',
-                rating: '5',
-                cover: 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1689255823i/150247395.jpg',
-                tags: ['Productivity', 'Mindset'],
-                quote: 'কঠোর পরিশ্রম নয়, বরং কাজকে আনন্দদায়ক করার মাধ্যমে কীভাবে দীর্ঘমেয়াদী সফলতা পাওয়া যায়।',
-                summary: 'প্রোডাক্টিভিটি বাড়ানোর জন্য কীভাবে প্লে, পাওয়ার এবং পারপাস ব্যবহার করবেন।'
-            }
-        ];
-
-        // Global State
         let booksData = [];
         let currentFilter = 'all';
         let searchQuery = '';
         let isAdmin = false;
 
-        // Initialize App on DOM Load
         window.addEventListener('DOMContentLoaded', () => {
             loadAdminState();
-            loadBooksData();
-            renderUI();
+            listenToBooksRealtime();
         });
 
-        // Admin Access Control Functions
+        // Realtime Listener from Firebase
+        function listenToBooksRealtime() {
+            onSnapshot(booksCollection, (snapshot) => {
+                booksData = snapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                }));
+                renderUI();
+            }, (error) => {
+                console.error("Firebase Read Error: ", error);
+            });
+        }
+
         function loadAdminState() {
             isAdmin = localStorage.getItem(ADMIN_STATE_KEY) === 'true';
             updateAdminUI();
@@ -656,7 +498,7 @@
             }
         }
 
-        function promptAdminLogin() {
+        window.promptAdminLogin = function() {
             if (isAdmin) {
                 showToast('আপনি ইতোমধ্যেই ক্রিয়েটর মোডে আছেন!');
                 return;
@@ -665,11 +507,10 @@
             document.getElementById('adminPinModal').classList.remove('hidden');
         }
 
-        function handlePinSubmit(event) {
-    event.preventDefault();
-    const pin = document.getElementById('adminPinInput').value;
+        window.handlePinSubmit = function(event) {
+            event.preventDefault();
+            const pin = document.getElementById('adminPinInput').value;
 
-    // আপনার নতুন পিন '78678' এবং বিকল্প পিন 'ariful' চেক
             if (pin === '78678' || pin === 'ariful') {
                 isAdmin = true;
                 localStorage.setItem(ADMIN_STATE_KEY, 'true');
@@ -682,34 +523,14 @@
             }
         }
 
-        function toggleAdminMode() {
+        window.toggleAdminMode = function() {
             isAdmin = false;
             localStorage.setItem(ADMIN_STATE_KEY, 'false');
             updateAdminUI();
-                renderBooks();
-            showToast('ক্রিয়েটর মোড বন্ধ করা হয়েছে (Visitor Mode Active)');
+            renderBooks();
+            showToast('ক্রিয়েটর মোড বন্ধ করা হয়েছে');
         }
 
-        // Data Load & Save
-        function loadBooksData() {
-            try {
-                const saved = localStorage.getItem(STORAGE_KEY);
-                if (saved) {
-                    booksData = JSON.parse(saved);
-                } else {
-                    booksData = [...initialBooks];
-                    saveBooksData();
-                }
-            } catch (e) {
-                booksData = [...initialBooks];
-            }
-        }
-
-        function saveBooksData() {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(booksData));
-        }
-
-        // UI Rendering Functions
         function renderUI() {
             renderStats();
             renderBooks();
@@ -737,6 +558,8 @@
         function renderBooks() {
             const grid = document.getElementById('booksGrid');
             const emptyState = document.getElementById('emptyState');
+            if(!grid) return;
+            
             grid.innerHTML = '';
 
             let filtered = booksData.filter(b => {
@@ -755,10 +578,10 @@
             });
 
             if (filtered.length === 0) {
-                emptyState.classList.remove('hidden');
+                emptyState?.classList.remove('hidden');
                 return;
             } else {
-                emptyState.classList.add('hidden');
+                emptyState?.classList.add('hidden');
             }
 
             filtered.forEach(book => {
@@ -773,7 +596,6 @@
                 else if (book.status === 'reading') statusBadge = `<span class="bg-amber-100 text-amber-800 text-[11px] font-bold px-2.5 py-1 rounded-full">এখন পড়ছি</span>`;
                 else statusBadge = `<span class="bg-sky-100 text-sky-800 text-[11px] font-bold px-2.5 py-1 rounded-full">পড়তে চাই</span>`;
 
-                // Render Edit/Delete controls ONLY if Creator Mode (isAdmin) is true
                 const adminControlsHtml = isAdmin ? `
                     <div class="flex items-center gap-3">
                         <button onclick="editBook('${book.id}')" class="hover:text-aliOrange" title="এডিট করুন">
@@ -816,9 +638,7 @@
                     ` : ''}
 
                     <div class="bg-stone-50 px-5 py-3 border-t border-stone-100 flex items-center justify-between text-xs font-bold text-stone-600">
-                        <button onclick="viewBook('${book.id}')" class="hover:text-aliBlue flex items-center gap-1">
-                            <i class="fa-solid fa-eye"></i> বিস্তারিত
-                        </button>
+                        <span class="text-[11px] text-stone-400">Firebase Synced</span>
                         ${adminControlsHtml}
                     </div>
                 `;
@@ -827,8 +647,7 @@
             });
         }
 
-        // Filter and Search Handlers
-        function setFilter(filter) {
+        window.setFilter = function(filter) {
             currentFilter = filter;
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 if (btn.getAttribute('data-filter') === filter) {
@@ -840,13 +659,12 @@
             renderBooks();
         }
 
-        function handleSearch() {
+        window.handleSearch = function() {
             searchQuery = document.getElementById('searchInput').value;
             renderBooks();
         }
 
-        // Modal Handlers
-        function openAddBookModal() {
+        window.openAddBookModal = function() {
             if (!isAdmin) {
                 showToast('কেবলমাত্র ক্রিয়েটর বই যোগ করতে পারবেন');
                 return;
@@ -857,45 +675,43 @@
             document.getElementById('bookModal').classList.remove('hidden');
         }
 
-        function closeModal(modalId) {
+        window.closeModal = function(modalId) {
             document.getElementById(modalId).classList.add('hidden');
         }
 
-        // Add/Edit Book Handler (Updated for File Upload)
-async function handleBookSubmit(event) {
-    event.preventDefault();
-    const id = document.getElementById('bookId').value;
-    const title = document.getElementById('formTitle').value;
-    const author = document.getElementById('formAuthor').value;
-    const status = document.getElementById('formStatus').value;
-    const rating = document.getElementById('formRating').value;
-    const fileInput = document.getElementById('formCoverFile');
-    const tagsInput = document.getElementById('formTags').value;
-    const quote = document.getElementById('formQuote').value;
-    const summary = document.getElementById('formSummary').value;
+        window.handleBookSubmit = async function(event) {
+            event.preventDefault();
+            const saveBtn = document.getElementById('saveBookBtn');
+            saveBtn.innerText = "সেভ হচ্ছে...";
+            saveBtn.disabled = true;
 
-    const tags = tagsInput ? tagsInput.split(',').map(t => t.trim()) : [];
+            const id = document.getElementById('bookId').value;
+            const title = document.getElementById('formTitle').value;
+            const author = document.getElementById('formAuthor').value;
+            const status = document.getElementById('formStatus').value;
+            const rating = document.getElementById('formRating').value;
+            const fileInput = document.getElementById('formCoverFile');
+            const tagsInput = document.getElementById('formTags').value;
+            const quote = document.getElementById('formQuote').value;
+            const summary = document.getElementById('formSummary').value;
 
-    // আগের বই খুঁজে পাওয়া (যদি এডিট মোড হয়)
-    let existingBook = booksData.find(b => b.id === id);
-    let coverBase64 = existingBook ? existingBook.cover : '';
+            const tags = tagsInput ? tagsInput.split(',').map(t => t.trim()) : [];
 
-    // যদি নতুন কোনো ছবি আপলোড করা হয়ে থাকে
-    if (fileInput.files && fileInput.files[0]) {
-        try {
-            coverBase64 = await convertFileToBase64(fileInput.files[0]);
-        } catch (e) {
-            showToast('ছবি প্রসেস করতে সমস্যা হয়েছে!');
-            return;
-        }
-    }
+            let existingBook = booksData.find(b => b.id === id);
+            let coverBase64 = existingBook ? existingBook.cover : '';
 
-    if (id) {
-        // Update Existing Book
-        const idx = booksData.findIndex(b => b.id === id);
-        if (idx !== -1) {
-            booksData[idx] = { 
-                ...booksData[idx], 
+            if (fileInput && fileInput.files && fileInput.files[0]) {
+                try {
+                    coverBase64 = await convertFileToBase64(fileInput.files[0]);
+                } catch (e) {
+                    showToast('ছবি প্রসেস করতে সমস্যা হয়েছে!');
+                    saveBtn.innerText = "সেভ করুন";
+                    saveBtn.disabled = false;
+                    return;
+                }
+            }
+
+            const bookPayload = {
                 title, 
                 author, 
                 status, 
@@ -903,67 +719,72 @@ async function handleBookSubmit(event) {
                 cover: coverBase64, 
                 tags, 
                 quote, 
-                summary 
+                summary,
+                updatedAt: new Date().toISOString()
             };
-            showToast('বইয়ের তথ্য আপডেট হয়েছে!');
+
+            try {
+                if (id) {
+                    await updateDoc(doc(db, "books", id), bookPayload);
+                    showToast('বইয়ের তথ্য ক্লাউডে আপডেট হয়েছে!');
+                } else {
+                    await addDoc(booksCollection, bookPayload);
+                    showToast('নতুন বই ক্লাউডে সেভ হয়েছে!');
+                }
+                closeModal('bookModal');
+            } catch (err) {
+                console.error(err);
+                showToast('সেভ করতে সমস্যা হয়েছে!');
+            } finally {
+                saveBtn.innerText = "সেভ করুন";
+                saveBtn.disabled = false;
+            }
         }
-    } else {
-        // Add New Book
-        const newBook = {
-            id: String(Date.now()),
-            title, 
-            author, 
-            status, 
-            rating, 
-            cover: coverBase64, 
-            tags, 
-            quote, 
-            summary
-        };
-        booksData.unshift(newBook);
-        showToast('নতুন বই যুক্ত করা হয়েছে!');
-    }
 
-    saveBooksData();
-    renderUI();
-    closeModal('bookModal');
-}
+        window.deleteBook = async function(id) {
+            if (!confirm("আপনি কি নিশ্চিত এই বইটি মুছে ফেলতে চান?")) return;
+            try {
+                await deleteDoc(doc(db, "books", id));
+                showToast("বইটি ক্লাউড থেকে মুছে ফেলা হয়েছে");
+            } catch(e) {
+                showToast("মুছে ফেলতে সমস্যা হয়েছে");
+            }
+        }
 
-// File to Base64 Converter Helper Function
-function convertFileToBase64(file) {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = error => reject(error);
-    });
-}
+        window.editBook = function(id) {
+            const book = booksData.find(b => b.id === id);
+            if (!book) return;
 
-// Edit Book Handler
-function editBook(id) {
-    const book = booksData.find(b => b.id === id);
-    if (!book) return;
+            document.getElementById('modalTitle').innerText = 'বইয়ের তথ্য এডিট করুন';
+            document.getElementById('bookId').value = book.id;
+            document.getElementById('formTitle').value = book.title || '';
+            document.getElementById('formAuthor').value = book.author || '';
+            document.getElementById('formStatus').value = book.status || 'reading';
+            document.getElementById('formRating').value = book.rating || '5';
+            
+            if(document.getElementById('formCoverFile')) {
+                document.getElementById('formCoverFile').value = '';
+            }
+            
+            document.getElementById('formTags').value = Array.isArray(book.tags) ? book.tags.join(', ') : (book.tags || '');
+            document.getElementById('formQuote').value = book.quote || '';
+            document.getElementById('formSummary').value = book.summary || '';
 
-    document.getElementById('modalTitle').innerText = 'বইয়ের তথ্য এডিট করুন';
-    document.getElementById('bookId').value = book.id;
-    document.getElementById('formTitle').value = book.title || '';
-    document.getElementById('formAuthor').value = book.author || '';
-    document.getElementById('formStatus').value = book.status || 'reading';
-    document.getElementById('formRating').value = book.rating || '5';
-    
-    // ছবি ইনপুট ফিল্ডটি খালি রাখা হচ্ছে (নতুন দিলে আপডেট হবে, না দিলে আগের ছবি থাকবে)
-    document.getElementById('formCoverFile').value = '';
-    
-    document.getElementById('formTags').value = Array.isArray(book.tags) ? book.tags.join(', ') : (book.tags || '');
-    document.getElementById('formQuote').value = book.quote || '';
-    document.getElementById('formSummary').value = book.summary || '';
+            document.getElementById('bookModal').classList.remove('hidden');
+        }
 
-    document.getElementById('bookModal').classList.remove('hidden');
-}
+        function convertFileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
+        }
 
-        // Smooth Custom Toast
         function showToast(msg) {
             const toast = document.getElementById('toast');
+            if(!toast) return;
             document.getElementById('toastMsg').innerText = msg;
             toast.classList.remove('translate-y-20', 'opacity-0');
             setTimeout(() => {
